@@ -1,0 +1,206 @@
+/* TrioAir top chrome: app bar (7854:2056), main header (7854:12641), status bar (7792:2198). */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200..700&display=swap');
+
+.trio-hdr-btn-reset {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.trio-hdr-icon { display: block; flex-shrink: 0; }
+
+/* ---------------- App bar ---------------- */
+.trio-appbar {
+  width: 1920px;
+  height: 56px;
+  background: #292929;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xs) var(--space-xl);
+  color: var(--fg-inverse-01);
+}
+.trio-appbar__left { display: flex; align-items: center; height: 40px; }
+.trio-appbar__brand { display: flex; align-items: center; gap: var(--space-m); height: 40px; }
+.trio-appbar__logo { display: block; width: 101.7px; height: 22.18px; }
+.trio-appbar__divider {
+  display: flex; align-items: center; justify-content: center;
+  height: 24px; padding: 0 var(--space-3xs);
+}
+.trio-appbar__divider::before { content: ''; display: block; width: 1px; height: 100%; background: var(--border-01); }
+
+.trio-farm-select {
+  width: 222px; height: 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 8px 0 12px;
+  border: 1px solid var(--gray-500);
+  border-radius: var(--radius-s);
+  color: var(--fg-inverse-01);
+  transition: background-color .12s;
+}
+.trio-farm-select:hover { background: rgba(255, 255, 255, 0.06); }
+.trio-farm-select:active { background: rgba(255, 255, 255, 0.12); }
+.trio-farm-select__value { display: flex; align-items: center; gap: var(--space-xs); }
+.trio-farm-select__avatar {
+  width: 24px; height: 24px; border-radius: 30px;
+  background: var(--gray-500);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500; line-height: 1.2; color: var(--fg-inverse-01);
+}
+.trio-farm-select__name { font-size: 16px; line-height: 1.2; white-space: nowrap; }
+
+.trio-appbar__iconbtn {
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-2xs);
+  border-radius: var(--radius-s);
+  color: var(--fg-inverse-01);
+  transition: background-color .12s;
+}
+.trio-appbar__iconbtn:hover { background: rgba(255, 255, 255, 0.1); }
+.trio-appbar__iconbtn:active { background: rgba(255, 255, 255, 0.18); }
+
+.trio-tabs { display: flex; align-items: center; gap: 9px; margin-left: 19px; }
+.trio-tab {
+  height: 40px;
+  display: flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  padding: 0 var(--space-xs) 2px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--gray-500);
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: background-color .12s;
+}
+.trio-tab--active { background: var(--gray-white); border-color: var(--gray-white); color: var(--gray-500); }
+.trio-tab:hover { background: rgba(255, 255, 255, 0.06); }
+.trio-tab--active:hover { background: var(--gray-150); border-color: var(--gray-150); }
+.trio-tab:active { background: rgba(255, 255, 255, 0.12); }
+.trio-tab--active:active { background: var(--gray-200); border-color: var(--gray-200); }
+.trio-tab__label { display: flex; align-items: center; gap: var(--space-2xs); }
+.trio-tab__text { width: 77px; font-size: 16px; line-height: 1.2; padding-top: 2px; white-space: nowrap; }
+.trio-tab__close { display: flex; border-radius: var(--radius-xs); }
+.trio-tab__close:hover { background: rgba(127, 127, 127, 0.2); }
+
+.trio-appbar__plus { margin-left: 17px; }
+
+.trio-appbar__right { display: flex; align-items: center; gap: var(--space-m); }
+.trio-appbar__help {
+  width: 36px; height: 36px; border-radius: var(--radius-xxl);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--fg-inverse-01);
+  transition: background-color .12s;
+}
+.trio-appbar__help:hover { background: rgba(255, 255, 255, 0.1); }
+.trio-appbar__help:active { background: rgba(255, 255, 255, 0.18); }
+.trio-appbar__user { display: flex; align-items: center; gap: var(--space-s); }
+.trio-avatar {
+  position: relative;
+  width: 40px; height: 40px; border-radius: var(--radius-xxl);
+  background: var(--bg-02);
+  display: flex; align-items: center; justify-content: center;
+  padding: 3px 1px 1px;
+  font-size: 18px; font-weight: 500; line-height: 1.2; color: var(--fg-02);
+}
+.trio-avatar__badge {
+  position: absolute; left: 2px; top: 1.5px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--danger);
+}
+.trio-appbar__username {
+  max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 14px; line-height: 1.2; color: var(--fg-inverse-02);
+}
+
+/* ---------------- Main header ---------------- */
+.trio-mainheader {
+  width: 1888px;
+  height: 78px;
+  display: flex; align-items: center;
+  padding: var(--space-s) var(--space-xl);
+  background: var(--gray-600);
+  border-radius: var(--radius-xl);
+  color: var(--fg-inverse-01);
+}
+.trio-mainheader__left { flex: 1 0 0; display: flex; align-items: flex-start; gap: var(--space-xl); }
+.trio-mainheader__right { flex: 1 0 0; display: flex; align-items: center; justify-content: flex-end; }
+.trio-mainheader__btns { display: flex; gap: var(--space-m); }
+.trio-mainheader__btn {
+  width: 54px; height: 54px; border-radius: var(--radius-xxl);
+  border: 1px solid rgba(255, 255, 255, 0.56);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--fg-inverse-01);
+  transition: background-color .12s;
+}
+.trio-mainheader__btn:hover { background: rgba(0, 0, 0, 0.12); }
+.trio-mainheader__btn:active { background: rgba(0, 0, 0, 0.22); }
+.trio-mainheader__line { width: 1px; height: 53px; background: rgba(255, 255, 255, 0.35); }
+.trio-mainheader__time { display: flex; align-items: center; gap: var(--space-xl); height: 53px; white-space: nowrap; }
+.trio-mainheader__block { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.trio-mainheader__label { font-size: 16px; line-height: 19px; opacity: 0.5; }
+.trio-mainheader__value { font-size: 24px; line-height: 29px; font-variant-numeric: tabular-nums; }
+
+/* ---------------- Status bar ---------------- */
+.trio-statusbar {
+  width: 1888px;
+  height: 42px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'DM Sans', 'Roboto', system-ui, sans-serif;
+  font-optical-sizing: auto;
+  color: var(--gray-600);
+}
+.trio-statusbar__house { display: flex; align-items: center; gap: var(--space-s); }
+.trio-statusbar__title {
+  margin: 0;
+  font-size: 36px; font-weight: 600; letter-spacing: -1.8px; line-height: 32px;
+  color: var(--gray-600); white-space: nowrap;
+}
+.trio-statusbar__mode {
+  height: 32px; display: flex; align-items: center;
+  padding: 4px 6px;
+  border-radius: var(--radius-s);
+  background: var(--gray-800);
+  color: var(--gray-150);
+  font-size: 20px; font-weight: 500; line-height: 24px; white-space: nowrap;
+}
+.trio-statusbar__env { display: flex; align-items: center; gap: var(--space-l); height: 42px; }
+.trio-weather {
+  height: 42px;
+  display: flex; align-items: center; gap: var(--space-m);
+  padding: var(--space-2xs) var(--space-s) var(--space-2xs) var(--space-2xs);
+  border: 1px solid var(--gray-250);
+  border-radius: var(--radius-s);
+}
+.trio-weather__outside {
+  height: 32px;
+  display: flex; align-items: center; gap: 4px;
+  padding: 4px 6px;
+  border-radius: var(--radius-xs);
+  background: var(--gray-200);
+  font-size: 20px; font-variation-settings: 'opsz' 9; line-height: 24px;
+}
+.trio-weather__metrics { display: flex; align-items: center; gap: var(--space-s); }
+.trio-weather__metric { display: flex; align-items: center; gap: var(--space-2xs); white-space: nowrap; }
+.trio-weather__metric--wide { gap: 10px; }
+.trio-weather__value { display: flex; align-items: baseline; gap: 2px; }
+.trio-weather__num { font-size: 24px; line-height: 24px; font-variation-settings: 'opsz' 9; }
+.trio-weather__unit { font-size: 16px; font-weight: 600; line-height: 24px; }
+.trio-weather__sep { width: 7px; height: 22px; display: flex; justify-content: center; }
+.trio-weather__sep::before { content: ''; width: 1px; height: 100%; background: var(--gray-250); }
+
+.trio-output-btn {
+  width: 224px; height: 40px;
+  display: flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  padding: 0 var(--space-s);
+  border-radius: var(--radius-xxl);
+  background: #292929;
+  color: var(--fg-inverse-01);
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 16px; font-weight: 500; line-height: 1.2; text-transform: uppercase; white-space: nowrap;
+  transition: background-color .12s;
+}
+.trio-output-btn:hover { background: var(--gray-800); }
+.trio-output-btn:active { background: var(--gray-900); }
+.trio-hdr-btn-reset:focus-visible { outline: 2px solid var(--blue-300); outline-offset: 2px; }
