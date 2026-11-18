@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#f2f2f3"><svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#f2f2f3"></rect><polyline points="30,40 48,40 54,26 62,54 70,32 76,40 90,40" fill="none" stroke="#5980a6" stroke-width="3"></polyline></svg></template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/industry-026b1232-3228-4a33-bc0f-1951ba873b1c/styles.css">
+<script src="_ds/industry-026b1232-3228-4a33-bc0f-1951ba873b1c/_ds_bundle.js"></script>
+<style>body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body)}a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-900)}</style>
+</helmet>
+<div style="display:flex;width:100%;height:100vh;overflow:hidden">
+<div style="flex:1 1 0;min-width:0;height:100%;position:relative;overflow:auto">
+<dc-import name="Broiler Dashboard Prototype" dc-props="{{ cfg }}" hint-size="100%,100%"></dc-import>
+</div>
+<sc-if value="{{ open }}">
+  <aside style="flex:none;width:280px;height:100%;box-sizing:border-box;border-left:1px solid var(--color-divider);background:var(--color-bg);overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:16px;font-size:13px">
+    <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:var(--font-heading);font-size:20px;font-weight:600">Options</span><button class="btn btn-ghost btn-icon" onClick="{{ toggle }}" aria-label="Hide options">→</button></div>
+    <sc-for list="{{ groups }}" as="g">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700);font-weight:600">{{ g.t }}</span>
+        <sc-for list="{{ g.items }}" as="c">
+          <label style="display:flex;flex-direction:column;gap:4px">
+            <span style="font-size:12px;color:var(--color-neutral-800)">{{ c.label }}</span>
+            <sc-if value="{{ c.isSel }}"><select class="input" value="{{ c.val }}" onChange="{{ c.onSel }}" style="width:100%;box-sizing:border-box"><sc-for list="{{ c.opts }}" as="o"><option value="{{ o.v }}" selected="{{ o.sel }}">{{ o.v }}</option></sc-for></select></sc-if>
+            <sc-if value="{{ c.isBool }}"><button onClick="{{ c.onTog }}" style="display:flex;align-items:center;gap:8px;background:none;border:0;padding:2px 0;cursor:pointer;font:inherit;color:var(--color-text)"><span style="{{ c.track }}"><span style="{{ c.knob }}"></span></span>{{ c.stateText }}</button></sc-if>
+          </label>
+        </sc-for>
+      </div>
+    </sc-for>
+    <button class="btn btn-secondary" onClick="{{ reset }}" style="margin-top:auto">Reset to defaults</button>
+  </aside>
+</sc-if>
+</div>
+<sc-if value="{{ closed }}">
+  <button class="btn btn-primary" onClick="{{ toggle }}" style="position:fixed;right:20px;bottom:20px;z-index:1000;gap:8px;box-shadow:var(--shadow-md)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path></svg>Options</button>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const SPEC=[
+ {t:'Screen',items:[{k:'viewport',label:'Screen',opts:['SaaS desktop','Controller screen','SaaS tablet'],def:'SaaS desktop'},{k:'devices',label:'Connected devices',opts:['Minimum · 2','Typical · 7','Full · 10'],def:'Full · 10'}]},
+ {t:'Widgets',items:[{k:'houseView',label:'House view',type:'bool',def:false}]},
+ {t:'Air flow',items:[{k:'ventDriver',label:'Ventilation driver',opts:['None','Heating','Cooling','CO2','NH3','RH'],def:'Heating'},{k:'inletsClosed',label:'Inlets closed',type:'bool',def:false},{k:'pressureError',label:'Pressure out of band',type:'bool',def:false}]}
+];
+const LS='broilerDashExportCfg3',LSO='broilerDashExportOpen';
+class Component extends DCLogic {
+  state=(()=>{const d={};SPEC.forEach(g=>g.items.forEach(i=>d[i.k]=i.def));let s={};try{s=JSON.parse(localStorage.getItem(LS)||'{}');}catch(e){}let o=true;try{o=localStorage.getItem(LSO)!=='0';}catch(e){}return {cfg:{...d,...s},open:o};})();
+  defs(){const d={};SPEC.forEach(g=>g.items.forEach(i=>d[i.k]=i.def));return d;}
+  set(k,v){this.setState(s=>{const cfg={...s.cfg,[k]:v};try{localStorage.setItem(LS,JSON.stringify(cfg));}catch(e){}return {cfg};});}
+  renderVals(){
+    const c=this.state.cfg;
+    return {cfg:c,open:this.state.open,closed:!this.state.open,
+      toggle:()=>this.setState(s=>{try{localStorage.setItem(LSO,s.open?'0':'1');}catch(e){}return {open:!s.open};}),
+      reset:()=>{const d=this.defs();try{localStorage.setItem(LS,JSON.stringify(d));}catch(e){}this.setState({cfg:d});},
+      groups:SPEC.map(g=>({t:g.t,items:g.items.map(i=>{const on=!!c[i.k];return {label:i.label,isSel:i.type!=='bool',isBool:i.type==='bool',val:c[i.k],opts:(i.opts||[]).map(v=>({v,sel:v===c[i.k]})),
+        onSel:e=>this.set(i.k,e.target.value),onTog:()=>this.set(i.k,!c[i.k]),stateText:on?'On':'Off',
+        track:{position:'relative',width:36,height:20,boxSizing:'border-box',border:'1px solid '+(on?'var(--color-accent)':'var(--color-neutral-500)'),background:on?'var(--color-accent)':'var(--color-bg)',flex:'none'},
+        knob:{position:'absolute',top:2,left:on?18:2,width:14,height:14,background:on?'#fff':'var(--color-neutral-600)',transition:'left .15s'}};})}))};
+  }
+}
+</script>
+</body>
+</html>

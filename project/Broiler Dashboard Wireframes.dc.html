@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/industry-026b1232-3228-4a33-bc0f-1951ba873b1c/styles.css">
+<script src="_ds/industry-026b1232-3228-4a33-bc0f-1951ba873b1c/_ds_bundle.js"></script>
+<style>body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body)}a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-900)}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid var(--color-divider);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:var(--color-text);color:var(--color-bg);border-radius:4px;text-decoration:none}.dv-tname{font:600 15px/1.2 var(--font-heading);letter-spacing:.02em}.dv-opts{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:var(--color-neutral-200);color:var(--color-text);border-radius:4px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font-size:12px;color:var(--color-neutral-700)}.dv-card{max-width:100%;background:var(--color-bg);border:1px solid var(--color-divider);overflow:hidden;position:relative}.dv-opt:target .dv-oid{background:var(--color-accent);color:#fff}.dv-next{margin:22px 0 0;font-size:12px;color:var(--color-neutral-700)}</style>
+</helmet>
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">House schematic — top view heat map (use Tweaks to set problem zone and layer)</span></div>
+<div class="dv-opts">
+<div class="dv-opt" id="2a">
+<div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Top-view house plan · zones turn red on a problem · click a zone or widget for its drawer</div>
+<div class="dv-card" style="width:1280px;height:800px;display:flex;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:20px;padding:18px 28px;border-bottom:1px solid var(--color-divider)">
+    <div style="display:flex;align-items:center;gap:10px;margin-right:auto">
+      <svg width="34" height="20" viewBox="0 0 34 20" fill="none" stroke="var(--color-accent)" stroke-width="1.5"><polyline points="0,10 9,10 12,3 16,17 20,7 23,10 34,10"></polyline></svg>
+      <div style="display:flex;flex-direction:column">
+        <span style="font-family:var(--font-heading);font-size:22px;font-weight:600;line-height:1">House 3 · Schematic</span>
+        <span style="font-size:12px;color:var(--color-neutral-700)">Flock day 28 · Grow-out · 18,420 birds</span>
+      </div>
+    </div>
+    <div class="seg"><sc-for list="{{ layers }}" as="l"><label class="seg-opt" style="{{ l.style }}">{{ l.label }}</label></sc-for></div>
+    <span style="{{ hm.bannerStyle }}">{{ hm.banner }}</span>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;padding:20px 28px 12px;min-height:0">
+    <div style="position:relative;min-height:0">
+      <div style="position:absolute;left:0;top:30px;bottom:30px;width:70px;display:flex;flex-direction:column;justify-content:center;gap:14px;align-items:center">
+        <sc-for list="{{ hm.silos }}" as="s"><div style="{{ s.style }}">{{ s.label }}</div></sc-for>
+      </div>
+      <div style="position:absolute;left:90px;right:30px;top:20px;bottom:20px;border:2px solid var(--color-text);overflow:hidden;background:var(--color-bg)">
+        <div style="position:absolute;inset:-20px;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(2,1fr);filter:blur(22px)">
+          <sc-for list="{{ hm.zones }}" as="z"><div style="{{ z.heat }}"></div></sc-for>
+        </div>
+        <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(2,1fr)">
+          <sc-for list="{{ hm.zones }}" as="z" hint-placeholder-count="12">
+            <div onClick="{{ z.open }}" style="{{ z.cell }}">
+              <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-900)">{{ z.name }}</span>
+              <span style="{{ z.valStyle }}">{{ z.val }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ hm.equip }}">
+          <sc-for list="{{ hm.marks }}" as="m"><div style="{{ m.style }}">{{ m.label }}</div></sc-for>
+        </sc-if>
+      </div>
+      <span style="position:absolute;right:0;top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:center;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700);right:-18px">Tunnel end</span>
+      <span style="position:absolute;left:90px;bottom:0;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">Entrance · control room</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">{{ hm.layerName }} · house</span>
+        <div style="display:flex;align-items:baseline;gap:6px"><span style="font-family:var(--font-heading);font-size:44px;font-weight:600;line-height:1">{{ hm.avg }}</span><span style="color:var(--color-neutral-700)">{{ hm.unit }} avg</span></div>
+        <span style="font-size:12px;color:var(--color-neutral-700)">Range across zones {{ hm.range }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Scale</span>
+        <div style="height:10px;background:linear-gradient(90deg,#a9dcff,#7cc4f7 45%,#f2a38f 75%,#e0473a)"></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-neutral-700)"><span>On target</span><span>Problem</span></div>
+      </div>
+      <sc-if value="{{ hm.hasProblem }}">
+        <div onClick="{{ hm.openProblem }}" style="padding:12px;border:1px solid #e0473a;display:flex;flex-direction:column;gap:4px;cursor:pointer" style-hover="background:#fdecea">
+          <span style="font-size:11px;font-weight:600;color:#b3261e">{{ hm.problemTitle }}</span>
+          <span style="font-size:13px;line-height:1.45">{{ hm.problemText }}</span>
+          <span style="font-size:12px;color:var(--color-accent-700)">Open zone →</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ hm.allGood }}">
+        <div style="padding:12px;background:var(--color-accent-100);font-size:13px;line-height:1.45">All 12 zones are within the target band.</div>
+      </sc-if>
+      <sc-if value="{{ hm.equip }}">
+        <div style="margin-top:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;font-size:11px;color:var(--color-neutral-700)">
+          <span>▮ Tunnel / side fan</span><span>● Heater</span><span>◦ Temp sensor</span><span>— Inlet</span>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:10px;padding:8px 28px 20px">
+    <sc-for list="{{ widgets }}" as="w" hint-placeholder-count="10">
+      <div class="blueprint" onClick="{{ w.openS }}" style="padding:10px;display:flex;flex-direction:column;gap:3px;cursor:pointer;min-width:0" style-hover="background:var(--color-accent-100)"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:4px"><span style="font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.title }}</span><span style="{{ w.dotStyle }}"></span></div>
+        <div style="display:flex;align-items:baseline;gap:3px"><span style="font-family:var(--font-heading);font-size:22px;font-weight:600;line-height:1">{{ w.value }}</span><span style="font-size:10px;color:var(--color-neutral-700)">{{ w.unit }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+  <sc-if value="{{ openS }}">
+    <div onClick="{{ close }}" style="position:absolute;inset:0;z-index:10;background:color-mix(in srgb,var(--color-neutral-900) 35%,transparent)"></div>
+    <div style="position:absolute;top:0;right:0;bottom:0;width:480px;z-index:11;background:var(--color-bg);box-shadow:var(--shadow-lg);display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;padding:18px 24px;border-bottom:1px solid var(--color-divider)">
+        <sc-if value="{{ inSettings }}"><button class="btn btn-ghost" onClick="{{ back }}">← Back</button></sc-if>
+        <div style="display:flex;flex-direction:column;margin-right:auto">
+          <span style="font-size:11px;color:var(--color-neutral-700)">{{ d.crumb }}</span>
+          <span style="font-family:var(--font-heading);font-size:24px;font-weight:600;line-height:1.1">{{ d.title }}</span>
+        </div>
+        <button class="btn btn-secondary btn-icon" onClick="{{ close }}">✕</button>
+      </div>
+      <sc-if value="{{ inDetail }}">
+        <div style="flex:1;overflow:auto;padding:20px 24px;display:flex;flex-direction:column;gap:22px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--font-heading);font-size:52px;font-weight:600;line-height:1">{{ d.value }}</span><span style="color:var(--color-neutral-700)">{{ d.unit }}</span><span class="{{ d.tagClass }}" style="{{ d.tagStyle }}">{{ d.statusText }}</span></div>
+            <span style="font-size:13px;color:var(--color-neutral-700)">{{ d.note }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Readings now</span>
+            <sc-for list="{{ d.now }}" as="r"><div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--color-divider)"><span style="color:var(--color-neutral-700)">{{ r.k }}</span><span>{{ r.v }}</span></div></sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Over time</span>
+              <div class="seg"><sc-for list="{{ ranges }}" as="g"><label class="seg-opt" onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</label></sc-for></div></div>
+            <div class="blueprint" style="height:140px;padding:8px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <svg viewBox="0 0 400 120" preserveAspectRatio="none" style="width:100%;height:100%"><line x1="0" y1="60" x2="400" y2="60" stroke="var(--color-neutral-400)" stroke-dasharray="4 4"></line><polyline points="{{ trend }}" fill="none" stroke="var(--color-accent)" stroke-width="1.5" vector-effect="non-scaling-stroke"></polyline></svg>
+            </div>
+            <span style="font-size:11px;color:var(--color-neutral-700)">Dashed line = target · {{ rangeNote }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Care suggestions</span>
+            <sc-for list="{{ d.insights }}" as="n"><div style="display:flex;flex-direction:column;gap:4px;padding:12px;background:var(--color-accent-100)"><span style="font-size:11px;font-weight:600;color:var(--color-accent-800)">{{ n.kind }}</span><span style="font-size:13px;line-height:1.45">{{ n.text }}</span></div></sc-for>
+          </div>
+        </div>
+        <div style="padding:16px 24px;border-top:1px solid var(--color-divider)"><button class="btn btn-primary blueprint" style="width:100%" onClick="{{ toSettings }}"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Open {{ d.settingsName }} settings →</button></div>
+      </sc-if>
+      <sc-if value="{{ inSettings }}">
+        <div style="flex:1;overflow:auto;padding:20px 24px;display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ d.fields }}" as="f"><div class="field"><label>{{ f.k }}</label><input class="input" value="{{ f.v }}" readOnly="{{ true }}"></div></sc-for>
+        </div>
+        <div style="padding:16px 24px;border-top:1px solid var(--color-divider);display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-secondary" onClick="{{ back }}">Cancel</button><button class="btn btn-primary" onClick="{{ back }}">Save</button></div>
+      </sc-if>
+    </div>
+  </sc-if>
+</div>
+</div>
+</div>
+<p class="dv-next">Try next: "add time scrub to replay the heat map over 24 h" · "show bird density as another layer" · "combine <a class="dv-oid" href="#2a">2a</a> with the vitals rows from <a class="dv-oid" href="#1b">1b</a>"</p>
+</section>
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Broiler house dashboard — three layouts, click any widget to open its drawer</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Vitals board · equal grid · right-side drawer</div>
+<div class="dv-card" style="width:1280px;height:800px;display:flex;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:20px;padding:18px 28px;border-bottom:1px solid var(--color-divider)">
+    <div style="display:flex;align-items:center;gap:10px;margin-right:auto">
+      <svg width="34" height="20" viewBox="0 0 34 20" fill="none" stroke="var(--color-accent)" stroke-width="1.5"><polyline points="0,10 9,10 12,3 16,17 20,7 23,10 34,10"></polyline></svg>
+      <div style="display:flex;flex-direction:column">
+        <span style="font-family:var(--font-heading);font-size:22px;font-weight:600;line-height:1">House 3 · Vitals</span>
+        <span style="font-size:12px;color:var(--color-neutral-700)">Flock day 28 · Grow-out · 18,420 birds</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span class="tag tag-accent">Stable</span>
+      <span class="tag tag-outline">2 need attention</span>
+      <span style="font-size:12px;color:var(--color-neutral-700)">Updated 12:04</span>
+    </div>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:20px;padding:24px 28px">
+    <sc-for list="{{ widgets }}" as="w" hint-placeholder-count="10">
+      <div class="blueprint" onClick="{{ w.openA }}" style="display:flex;flex-direction:column;gap:10px;padding:16px;cursor:pointer;min-width:0" style-hover="background:var(--color-accent-100)">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:6px">
+          <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">{{ w.title }}</span>
+          <span class="{{ w.tagClass }}">{{ w.statusText }}</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:4px">
+          <span style="font-family:var(--font-heading);font-size:40px;font-weight:600;line-height:1">{{ w.value }}</span>
+          <span style="font-size:14px;color:var(--color-neutral-700)">{{ w.unit }}</span>
+        </div>
+        <span style="font-size:12px;color:var(--color-neutral-700)">{{ w.note }}</span>
+        <sc-if value="{{ w.hasGauge }}" hint-placeholder-val="{{ true }}">
+          <div style="position:relative;height:10px;display:flex;margin-top:4px">
+            <sc-for list="{{ w.bands }}" as="b"><div style="{{ b.style }}"></div></sc-for>
+            <div style="{{ w.markerStyle }}"></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ w.hasSilos }}">
+          <div style="display:flex;gap:8px;height:44px;align-items:flex-end">
+            <sc-for list="{{ w.silos }}" as="s"><div style="flex:1;height:100%;border:1px solid var(--color-neutral-500);position:relative"><div style="{{ s.fill }}"></div></div></sc-for>
+          </div>
+        </sc-if>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:4px">
+          <sc-for list="{{ w.rows }}" as="r"><div style="display:flex;justify-content:space-between;font-size:12px;border-top:1px solid var(--color-divider);padding-top:4px"><span style="color:var(--color-neutral-700)">{{ r.k }}</span><span>{{ r.v }}</span></div></sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <sc-if value="{{ openA }}">
+    <div onClick="{{ close }}" style="position:absolute;inset:0;background:color-mix(in srgb,var(--color-neutral-900) 35%,transparent)"></div>
+    <div style="position:absolute;top:0;right:0;bottom:0;width:480px;background:var(--color-bg);box-shadow:var(--shadow-lg);display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:10px;padding:18px 24px;border-bottom:1px solid var(--color-divider)">
+        <sc-if value="{{ inSettings }}"><button class="btn btn-ghost" onClick="{{ back }}">← Back</button></sc-if>
+        <div style="display:flex;flex-direction:column;margin-right:auto">
+          <span style="font-size:11px;color:var(--color-neutral-700)">{{ d.crumb }}</span>
+          <span style="font-family:var(--font-heading);font-size:24px;font-weight:600;line-height:1.1">{{ d.title }}</span>
+        </div>
+        <button class="btn btn-secondary btn-icon" onClick="{{ close }}">✕</button>
+      </div>
+      <sc-if value="{{ inDetail }}">
+        <div style="flex:1;overflow:auto;padding:20px 24px;display:flex;flex-direction:column;gap:22px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--font-heading);font-size:52px;font-weight:600;line-height:1">{{ d.value }}</span><span style="color:var(--color-neutral-700)">{{ d.unit }}</span><span class="{{ d.tagClass }}" style="margin-left:auto">{{ d.statusText }}</span></div>
+            <span style="font-size:13px;color:var(--color-neutral-700)">{{ d.note }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Readings now</span>
+            <sc-for list="{{ d.now }}" as="r"><div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--color-divider)"><span style="color:var(--color-neutral-700)">{{ r.k }}</span><span>{{ r.v }}</span></div></sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Over time</span>
+              <div class="seg"><sc-for list="{{ ranges }}" as="g"><label class="seg-opt" onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</label></sc-for></div></div>
+            <div class="blueprint" style="height:140px;padding:8px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <svg viewBox="0 0 400 120" preserveAspectRatio="none" style="width:100%;height:100%"><line x1="0" y1="60" x2="400" y2="60" stroke="var(--color-neutral-400)" stroke-dasharray="4 4"></line><polyline points="{{ trend }}" fill="none" stroke="var(--color-accent)" stroke-width="1.5" vector-effect="non-scaling-stroke"></polyline></svg>
+            </div>
+            <span style="font-size:11px;color:var(--color-neutral-700)">Dashed line = target · {{ rangeNote }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Care suggestions</span>
+            <sc-for list="{{ d.insights }}" as="n"><div style="display:flex;flex-direction:column;gap:4px;padding:12px;background:var(--color-accent-100)"><span style="font-size:11px;font-weight:600;color:var(--color-accent-800)">{{ n.kind }}</span><span style="font-size:13px;line-height:1.45">{{ n.text }}</span></div></sc-for>
+          </div>
+        </div>
+        <div style="padding:16px 24px;border-top:1px solid var(--color-divider)"><button class="btn btn-primary blueprint" style="width:100%" onClick="{{ toSettings }}"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Open {{ d.settingsName }} settings →</button></div>
+      </sc-if>
+      <sc-if value="{{ inSettings }}">
+        <div style="flex:1;overflow:auto;padding:20px 24px;display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ d.fields }}" as="f"><div class="field"><label>{{ f.k }}</label><input class="input" value="{{ f.v }}" readOnly="{{ true }}"></div></sc-for>
+        </div>
+        <div style="padding:16px 24px;border-top:1px solid var(--color-divider);display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-secondary" onClick="{{ back }}">Cancel</button><button class="btn btn-primary" onClick="{{ back }}">Save</button></div>
+      </sc-if>
+    </div>
+  </sc-if>
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Patient chart · triage column + vitals rows · wide tabbed drawer</div>
+<div class="dv-card" style="width:1280px;height:800px;display:grid;grid-template-columns:320px minmax(0,1fr)">
+  <div style="border-right:1px solid var(--color-divider);padding:24px;display:flex;flex-direction:column;gap:22px">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Patient</span>
+      <span style="font-family:var(--font-heading);font-size:30px;font-weight:600;line-height:1">House 3</span>
+      <span style="font-size:13px;color:var(--color-neutral-700)">Day 28 of 42 · 18,420 birds</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">House mode</span>
+      <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="tag tag-neutral">Empty</span><span class="tag tag-neutral">Pre heat</span><span class="tag tag-neutral">1st brood</span><span class="tag tag-neutral">2nd brood</span><span class="tag tag-accent" style="background:var(--color-accent);color:#fff">Grow-out</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Needs attention</span>
+      <sc-for list="{{ attention }}" as="w" hint-placeholder-count="2">
+        <div class="blueprint" onClick="{{ w.openB }}" style="padding:12px;display:flex;flex-direction:column;gap:4px;cursor:pointer" style-hover="background:var(--color-accent-100)"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display:flex;justify-content:space-between"><span style="font-weight:600;font-size:14px">{{ w.title }}</span><span class="{{ w.tagClass }}">{{ w.statusText }}</span></div>
+          <span style="font-size:12px;color:var(--color-neutral-700);line-height:1.4">{{ w.headline }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:auto;font-size:12px;color:var(--color-neutral-700)">Last reading 12:04 · Controller online</div>
+  </div>
+  <div style="display:flex;flex-direction:column;min-width:0">
+    <div style="display:grid;grid-template-columns:180px 150px minmax(0,1fr) 140px 110px 20px;gap:20px;padding:14px 28px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700);border-bottom:1px solid var(--color-divider)"><span>Vital</span><span>Now</span><span>Range</span><span>24 h</span><span>Status</span><span></span></div>
+    <sc-for list="{{ widgets }}" as="w" hint-placeholder-count="10">
+      <div onClick="{{ w.openB }}" style="display:grid;grid-template-columns:180px 150px minmax(0,1fr) 140px 110px 20px;gap:20px;align-items:center;padding:0 28px;height:68px;border-bottom:1px solid var(--color-divider);cursor:pointer" style-hover="background:var(--color-accent-100)">
+        <div style="display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">{{ w.title }}</span><span style="font-size:11px;color:var(--color-neutral-700)">{{ w.note }}</span></div>
+        <div style="display:flex;align-items:baseline;gap:4px"><span style="font-family:var(--font-heading);font-size:28px;font-weight:600">{{ w.value }}</span><span style="font-size:12px;color:var(--color-neutral-700)">{{ w.unit }}</span></div>
+        <div style="position:relative;height:10px;display:flex">
+          <sc-if value="{{ w.hasGauge }}"><sc-for list="{{ w.bands }}" as="b"><div style="{{ b.style }}"></div></sc-for><div style="{{ w.markerStyle }}"></div></sc-if>
+          <sc-if value="{{ w.hasSilos }}"><div style="display:flex;gap:6px;width:100%;height:10px"><sc-for list="{{ w.silos }}" as="s"><div style="flex:1;border:1px solid var(--color-neutral-500);position:relative"><div style="{{ s.fillH }}"></div></div></sc-for></div></sc-if>
+        </div>
+        <svg viewBox="0 0 400 120" preserveAspectRatio="none" style="width:140px;height:28px"><polyline points="{{ w.spark }}" fill="none" stroke="var(--color-accent)" stroke-width="1.5" vector-effect="non-scaling-stroke"></polyline></svg>
+        <span class="{{ w.tagClass }}" style="justify-self:start">{{ w.statusText }}</span>
+        <span style="color:var(--color-neutral-500)">›</span>
+      </div>
+    </sc-for>
+  </div>
+  <sc-if value="{{ openB }}">
+    <div onClick="{{ close }}" style="position:absolute;inset:0;background:color-mix(in srgb,var(--color-neutral-900) 35%,transparent)"></div>
+    <div style="position:absolute;top:0;right:0;bottom:0;width:760px;background:var(--color-bg);box-shadow:var(--shadow-lg);display:flex;flex-direction:column">
+      <div style="display:flex;align-items:flex-end;gap:16px;padding:20px 28px 0">
+        <div style="display:flex;flex-direction:column;margin-right:auto">
+          <span style="font-size:11px;color:var(--color-neutral-700)">{{ d.crumb }}</span>
+          <div style="display:flex;align-items:baseline;gap:12px"><span style="font-family:var(--font-heading);font-size:28px;font-weight:600">{{ d.title }}</span><span style="font-family:var(--font-heading);font-size:28px;color:var(--color-accent-700)">{{ d.value }} {{ d.unit }}</span><span class="{{ d.tagClass }}">{{ d.statusText }}</span></div>
+        </div>
+        <button class="btn btn-secondary btn-icon" onClick="{{ close }}" style="align-self:flex-start">✕</button>
+      </div>
+      <div style="display:flex;gap:0;padding:14px 28px 0;border-bottom:1px solid var(--color-divider)">
+        <sc-for list="{{ tabs }}" as="t"><button class="btn btn-ghost" onClick="{{ t.pick }}" style="{{ t.style }}">{{ t.label }}</button></sc-for>
+      </div>
+      <div style="flex:1;overflow:auto;padding:24px 28px">
+        <sc-if value="{{ tabNow }}">
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+            <sc-for list="{{ d.now }}" as="r"><div class="blueprint" style="padding:14px;display:flex;flex-direction:column;gap:4px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><span style="font-size:11px;color:var(--color-neutral-700)">{{ r.k }}</span><span style="font-family:var(--font-heading);font-size:24px;font-weight:600">{{ r.v }}</span></div></sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ tabTrend }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div class="seg" style="align-self:flex-start"><sc-for list="{{ ranges }}" as="g"><label class="seg-opt" onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</label></sc-for></div>
+            <div class="blueprint" style="height:300px;padding:12px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <svg viewBox="0 0 400 120" preserveAspectRatio="none" style="width:100%;height:100%"><line x1="0" y1="60" x2="400" y2="60" stroke="var(--color-neutral-400)" stroke-dasharray="4 4"></line><polyline points="{{ trend }}" fill="none" stroke="var(--color-accent)" stroke-width="1.5" vector-effect="non-scaling-stroke"></polyline></svg>
+            </div>
+            <span style="font-size:12px;color:var(--color-neutral-700)">Dashed line = target · {{ rangeNote }}</span>
+          </div>
+        </sc-if>
+        <sc-if value="{{ tabInsights }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ d.insights }}" as="n"><div class="blueprint" style="padding:16px;display:flex;gap:16px;align-items:flex-start"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><span class="tag tag-accent">{{ n.kind }}</span><span style="font-size:14px;line-height:1.5;flex:1">{{ n.text }}</span></div></sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ tabSettings }}">
+          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+            <sc-for list="{{ d.fields }}" as="f"><div class="field"><label>{{ f.k }}</label><input class="input" value="{{ f.v }}" readOnly="{{ true }}"></div></sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <div style="padding:16px 28px;border-top:1px solid var(--color-divider);display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:var(--color-neutral-700)">Full settings: {{ d.settingsPath }}</span><button class="btn btn-primary blueprint" onClick="{{ goSettingsTab }}"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Go to {{ d.settingsName }} settings →</button></div>
+    </div>
+  </sc-if>
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Focus view · lead vital + tile rail · bottom sheet</div>
+<div class="dv-card" style="width:1280px;height:800px;display:flex;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:16px;padding:18px 28px">
+    <span style="font-family:var(--font-heading);font-size:22px;font-weight:600;margin-right:auto">House 3</span>
+    <div class="seg"><label class="seg-opt">Houses</label><label class="seg-opt" style="background:var(--color-accent-100)">House 3</label></div>
+    <span class="tag tag-accent">Grow-out · Day 28</span>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;padding:0 28px 24px;min-height:0">
+    <div class="blueprint" onClick="{{ lead.openC }}" style="padding:28px;display:flex;flex-direction:column;gap:18px;cursor:pointer" style-hover="background:var(--color-accent-100)"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Lead vital · {{ lead.title }}</span><span class="{{ lead.tagClass }}">{{ lead.statusText }}</span></div>
+      <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--font-heading);font-size:120px;font-weight:600;line-height:.9">{{ lead.value }}</span><span style="font-size:24px;color:var(--color-neutral-700)">{{ lead.unit }}</span></div>
+      <span style="font-size:15px;color:var(--color-neutral-700)">{{ lead.note }}</span>
+      <div style="position:relative;height:16px;display:flex"><sc-for list="{{ lead.bands }}" as="b"><div style="{{ b.style }}"></div></sc-for><div style="{{ lead.markerStyle }}"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-neutral-700)"><span>Low alarm</span><span>Heat</span><span>Target</span><span>Cool</span><span>Tunnel</span><span>High alarm</span></div>
+      <svg viewBox="0 0 400 120" preserveAspectRatio="none" style="width:100%;flex:1;min-height:80px"><line x1="0" y1="60" x2="400" y2="60" stroke="var(--color-neutral-400)" stroke-dasharray="4 4"></line><polyline points="{{ lead.spark }}" fill="none" stroke="var(--color-accent)" stroke-width="1.5" vector-effect="non-scaling-stroke"></polyline></svg>
+      <div style="padding:12px;background:var(--color-accent-100);font-size:13px;line-height:1.45"><b style="color:var(--color-accent-800)">Suggestion · </b>{{ lead.headline }}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:14px;min-height:0">
+      <sc-for list="{{ others }}" as="w" hint-placeholder-count="9">
+        <div class="blueprint" onClick="{{ w.openC }}" style="padding:12px;display:flex;flex-direction:column;gap:4px;cursor:pointer;min-width:0" style-hover="background:var(--color-accent-100)"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:4px"><span style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-accent-700)">{{ w.title }}</span><span style="{{ w.dotStyle }}"></span></div>
+          <div style="display:flex;align-items:baseline;gap:3px;margin-top:auto"><span style="font-family:var(--font-heading);font-size:30px;font-weight:600;line-height:1">{{ w.value }}</span><span style="font-size:12px;color:var(--color-neutral-700)">{{ w.unit }}</span></div>
+          <span style="font-size:11px;color:var(--color-neutral-700);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ w.note }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <sc-if value="{{ openC }}">
+    <div onClick="{{ close }}" style="position:absolute;inset:0;background:color-mix(in srgb,var(--color-neutral-900) 35%,transparent)"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:560px;background:var(--color-bg);box-shadow:var(--shadow-lg);display:flex;flex-direction:column">
+      <div style="align-self:center;width:48px;height:4px;background:var(--color-neutral-300);margin-top:10px"></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 32px 16px;border-bottom:1px solid var(--color-divider)">
+        <sc-if value="{{ inSettings }}"><button class="btn btn-ghost" onClick="{{ back }}">← Back</button></sc-if>
+        <span style="font-size:12px;color:var(--color-neutral-700)">{{ d.crumb }}</span>
+        <span style="font-family:var(--font-heading);font-size:26px;font-weight:600;margin-right:auto">{{ d.title }}</span>
+        <sc-if value="{{ inDetail }}"><button class="btn btn-primary blueprint" onClick="{{ toSettings }}"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>{{ d.settingsName }} settings →</button></sc-if>
+        <button class="btn btn-secondary btn-icon" onClick="{{ close }}">✕</button>
+      </div>
+      <sc-if value="{{ inDetail }}">
+        <div style="flex:1;display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.4fr) minmax(0,1fr);gap:28px;padding:24px 32px;min-height:0">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Now</span>
+            <div style="display:flex;align-items:baseline;gap:6px"><span style="font-family:var(--font-heading);font-size:56px;font-weight:600;line-height:1">{{ d.value }}</span><span style="color:var(--color-neutral-700)">{{ d.unit }}</span></div>
+            <span class="{{ d.tagClass }}" style="align-self:flex-start">{{ d.statusText }}</span>
+            <sc-for list="{{ d.now }}" as="r"><div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--color-divider)"><span style="color:var(--color-neutral-700)">{{ r.k }}</span><span>{{ r.v }}</span></div></sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;min-height:0">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Over time</span><div class="seg"><sc-for list="{{ ranges }}" as="g"><label class="seg-opt" onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</label></sc-for></div></div>
+            <div class="blueprint" style="flex:1;padding:10px"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <svg viewBox="0 0 400 120" preserveAspectRatio="none" style="width:100%;height:100%"><line x1="0" y1="60" x2="400" y2="60" stroke="var(--color-neutral-400)" stroke-dasharray="4 4"></line><polyline points="{{ trend }}" fill="none" stroke="var(--color-accent)" stroke-width="1.5" vector-effect="non-scaling-stroke"></polyline></svg>
+            </div>
+            <span style="font-size:11px;color:var(--color-neutral-700)">Dashed line = target · {{ rangeNote }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">Care suggestions</span>
+            <sc-for list="{{ d.insights }}" as="n"><div style="display:flex;flex-direction:column;gap:4px;padding:12px;background:var(--color-accent-100)"><span style="font-size:11px;font-weight:600;color:var(--color-accent-800)">{{ n.kind }}</span><span style="font-size:13px;line-height:1.45">{{ n.text }}</span></div></sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ inSettings }}">
+        <div style="flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 28px;padding:24px 32px;align-content:start">
+          <sc-for list="{{ d.fields }}" as="f"><div class="field"><label>{{ f.k }}</label><input class="input" value="{{ f.v }}" readOnly="{{ true }}"></div></sc-for>
+        </div>
+        <div style="padding:16px 32px;border-top:1px solid var(--color-divider);display:flex;gap:8px;justify-content:flex-end"><button class="btn btn-secondary" onClick="{{ back }}">Cancel</button><button class="btn btn-primary" onClick="{{ back }}">Save</button></div>
+      </sc-if>
+    </div>
+  </sc-if>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "take <a class="dv-oid" href="#1a">1a</a> grid with the tabbed drawer from <a class="dv-oid" href="#1b">1b</a>" · "explore the gauge visuals for each widget" · "add the house schematic view"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;problemZone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;None&quot;,&quot;Zone 1&quot;,&quot;Zone 2&quot;,&quot;Zone 3&quot;,&quot;Zone 4&quot;,&quot;Zone 5&quot;,&quot;Zone 6&quot;,&quot;Zone 7&quot;,&quot;Zone 8&quot;,&quot;Zone 9&quot;,&quot;Zone 10&quot;,&quot;Zone 11&quot;,&quot;Zone 12&quot;],&quot;default&quot;:&quot;Zone 9&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Heat map&quot;},&quot;layer&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Temperature&quot;,&quot;Humidity&quot;,&quot;Ammonia&quot;],&quot;default&quot;:&quot;Temperature&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Heat map&quot;},&quot;showEquipment&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Heat map&quot;}}">
+const W = [
+ {id:'temp',title:'Temperature',value:'24.6',unit:'°C',note:'Target 25.0° · night shift',status:'watch',statusText:'Sensor drift',headline:'Sensor 3 reads 1.8° above the house average for 3 h. Check its position near heater 2.',
+  rows:[['Heat','24.0°'],['Cool','27.0°'],['Tunnel','28.0°']],gauge:{min:19,max:32,val:24.6,bands:[[19,21,3],[21,24,1],[24,27,2],[27,30,1],[30,32,3]]},
+  now:[['Measured (avg)','24.6 °C'],['Target','25.0 °C · night shift'],['Windchill','— (tunnel off)'],['Heat setpoint','24.0 °C'],['Cooling setpoint','27.0 °C'],['Tunnel setpoint','28.0 °C'],['Low / High alarm','21.0 / 30.0 °C'],['Sensors 1 · 2 · 3 · 4','24.2 · 24.4 · 26.4 · 24.1']],
+  insights:[['Observation','Sensor 3 has deviated from the average by more than 1.5° since 09:00.'],['Suggestion','Exclude sensor 3 from the average until checked, or move it away from heater 2.'],['Trend','Daily swing has narrowed from 2.4° to 1.1° over the past week.']],
+  set:'Temperature',path:'Climate › Temperature curve',fields:[['Target (day 28)','25.0 °C'],['Night shift','-0.5 °C'],['Heat offset','-1.0 °C'],['Cool offset','+2.0 °C'],['Low alarm','21.0 °C'],['High alarm','30.0 °C']],base:24.6,amp:1.1},
+ {id:'air',title:'Air quality',value:'68',unit:'% RH',note:'Treatment active · CO₂ 2,100 · NH₃ 12',status:'watch',statusText:'Treating',headline:'Humidity treatment has run 40 min. RH is falling 1% every 10 min.',
+  rows:[['CO₂','2,100 ppm'],['NH₃','12 ppm']],gauge:{min:0,max:100,val:68,bands:[[0,65,2],[65,80,1],[80,100,3]]},
+  now:[['Measured RH','68 %'],['RH treatment from','65 %'],['High humidity','80 %'],['CO₂','2,100 ppm · setpoint 3,000'],['NH₃','12 ppm · setpoint 20'],['Treatment','RH active · CO₂ off · NH₃ off']],
+  insights:[['Observation','RH crosses 65% most mornings between 06:00 and 08:00.'],['Suggestion','Raise minimum ventilation by one level from 05:30 to prevent the morning peak.']],
+  set:'Air quality',path:'Climate › Humidity / CO₂ / NH₃',fields:[['RH treatment from','65 %'],['High humidity alarm','80 %'],['CO₂ setpoint','3,000 ppm'],['High CO₂','4,000 ppm'],['NH₃ setpoint','20 ppm'],['High NH₃','30 ppm']],base:66,amp:4},
+ {id:'birds',title:'Bird management',value:'1.42',unit:'kg',note:'Avg weight · ♂ 1.51 ♀ 1.33',status:'ok',statusText:'Normal',headline:'Weight is 2% above the breed curve.',
+  rows:[['Birds','18,420'],['Mortality','2.1 %'],['FCR','1.48']],
+  now:[['Average weight','1.42 kg'],['Male / Female','1.51 / 1.33 kg'],['Birds in house','18,420'],['Mortality','2.1 % (392)'],['FCR','1.48']],
+  insights:[['Trend','Daily gain averaged 78 g over the last 7 days, 2% above the breed curve.'],['Observation','Mortality is in line with the previous three flocks.']],
+  set:'Flock',path:'Flock › Birds & growth curve',fields:[['Placed birds','18,812'],['Breed curve','Ross 308'],['Scale','Platform 1'],['Mortality entry','Daily']],base:1.4,amp:.05},
+ {id:'light',title:'Light',value:'18',unit:'lux',note:'On · output 62%',status:'ok',statusText:'On',headline:'Lights off in 2 h 10 min.',
+  rows:[['Output','62 %'],['Service mode','Off']],
+  now:[['Status','On'],['Output','62 %'],['Measured intensity','18 lux'],['Service light','Off'],['Next change','Off at 22:00']],
+  insights:[['Observation','Measured intensity is 3 lux lower than at placement at the same output.'],['Suggestion','Schedule a lamp clean during the next service window.']],
+  set:'Light',path:'Light › Program',fields:[['On time','04:00'],['Off time','22:00'],['Intensity','62 %'],['Dimming','15 min']],base:18,amp:2},
+ {id:'silo',title:'Silo',value:'6,240',unit:'kg',note:'4 silos · silo 3 low',status:'alert',statusText:'Alarm',headline:'Silo 4 cannot be read. Silo 3 is at 18% and will run out in about 9 h.',
+  rows:[['Silo 3','18 %'],['Silo 4','No reading']],silos:[72,45,18,-1],
+  now:[['Silo 1','3,600 kg · 72 %'],['Silo 2','2,250 kg · 45 %'],['Silo 3','390 kg · 18 %'],['Silo 4','Error · no reading'],['Total','6,240 kg']],
+  insights:[['Alarm','Silo 4 load cell has not reported since 10:42.'],['Suggestion','Order feed today: at current use silo 3 empties around 21:00.']],
+  set:'Silo',path:'Feed › Silos & load cells',fields:[['Silo count','4'],['Low level warning','20 %'],['Capacity per silo','5,000 kg'],['Calibration','Silo 4']],base:60,amp:10},
+ {id:'water',title:'Daily water',value:'3,840',unit:'L',note:'+4.2% vs yesterday',status:'ok',statusText:'Normal',headline:'Water/feed ratio is steady at 1.82.',
+  rows:[['W/F ratio','1.82'],['Line pressure','32 cm']],gauge:{min:0,max:60,val:32,bands:[[0,15,3],[15,45,2],[45,60,3]]},
+  now:[['Today','3,840 L'],['Vs yesterday','+4.2 %'],['Water / Feed','1.82'],['Drinker line pressure','32 cm'],['Pressure alarm','None'],['Emergency pressure','Off']],
+  insights:[['Trend','Consumption rose 4–5% a day this week, in line with flock age.']],
+  set:'Water',path:'Water › Meters & pressure',fields:[['High water alarm','+20 %'],['Low water alarm','-20 %'],['Line pressure','32 cm'],['Emergency pressure','55 cm']],base:3800,amp:200},
+ {id:'feed',title:'Daily feed',value:'2,110',unit:'kg',note:'-1.3% vs yesterday',status:'ok',statusText:'Normal',headline:'Feed intake dipped slightly after 11:00.',
+  rows:[['Vs yesterday','-1.3 %'],['Alarm','None']],
+  now:[['Today','2,110 kg'],['Vs yesterday','-1.3 %'],['Feed alarm','None']],
+  insights:[['Observation','Intake fell 1.3% while temperature stayed on target. Watch for a second day.']],
+  set:'Feed',path:'Feed › Consumption',fields:[['Under-feed alarm','-15 %'],['Over-feed alarm','+15 %'],['Feeder program','Ad lib']],base:2100,amp:80},
+ {id:'vent',title:'Ventilation',value:'P3',unit:'level',note:'42,000 m³/h · cycle 60/240 s',status:'ok',statusText:'Power',headline:'Running in power ventilation, cycling.',
+  rows:[['Fans','Side 4/6 · Stir 1/2'],['Static','18 Pa · target 20']],gauge:{min:0,max:40,val:13,bands:[[0,10,1],[10,30,2],[30,40,1]]},
+  now:[['Mode / level','Power · P3'],['Capacity','42,000 m³/h'],['Cycle','ON 60 s / OFF 240 s'],['Min / Max level','L4 / T6'],['Side fans','4 / 6'],['Tunnel fans','0 / 4'],['Stir fans','1 / 2'],['Static pressure','18 Pa · target 20 Pa']],
+  insights:[['Observation','Static pressure sits 2 Pa under target during ON cycles.'],['Suggestion','Check inlet opening calibration on the east wall.']],
+  set:'Ventilation',path:'Ventilation › Levels & pressure',fields:[['Min level','L4'],['Max level','T6'],['Pressure target','20 Pa'],['Pressure band','±5 Pa'],['High pressure alarm','35 Pa'],['Low pressure alarm','5 Pa']],base:13,amp:3},
+ {id:'output',title:'Output status',value:'14',unit:'/ 32 on',note:'Relays · 3 analog outputs',status:'ok',statusText:'Normal',headline:'All outputs responding.',
+  rows:[['Relays on','14 / 32'],['Analog out','3 active']],
+  now:[['Relays on','14 of 32'],['Analog outputs','3 active'],['Manual overrides','None']],
+  insights:[['Observation','No relay faults in the last 7 days.']],
+  set:'Outputs',path:'Installation › Relays & AO',fields:[['Relay layout','RotemTrio'],['AO devices','3']],base:14,amp:2},
+ {id:'mode',title:'House mode',value:'Grow-out',unit:'',note:'Day 28 · since day 15',status:'ok',statusText:'Active',headline:'Grow-out since day 15.',
+  rows:[['Next','Empty (day 42)']],
+  now:[['Current mode','Grow-out'],['Since','Day 15'],['Available','Empty · Pre heat · 1st brood · 2nd brood · Grow-out']],
+  insights:[['Reminder','Plan the switch to Empty after catching on day 42.']],
+  set:'House mode',path:'House › Mode',fields:[['Mode','Grow-out'],['Flock day','28']],base:0,amp:0}
+];
+const BAND = ['','var(--color-accent-100)','var(--color-accent-300)','var(--color-neutral-300)'];
+const TAG = {ok:'tag tag-neutral',watch:'tag tag-outline',alert:'tag tag-accent'};
+function rand(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
+function series(id,n){const r=rand(id.length*97+n);const k=n<30?1:3;let pts=[];for(let i=0;i<n;i++){const y=60-Math.sin(i/n*Math.PI*2*k)*30-(r()-.5)*24;pts.push(`${(i/(n-1)*400).toFixed(1)},${Math.max(4,Math.min(116,y)).toFixed(1)}`);}return pts.join(' ');}
+class Component extends DCLogic {
+  state = { open:null, opt:null, view:'detail', range:'24h', tab:'now' };
+  open(opt,id){ this.setState({open:id,opt,view:'detail',tab:'now',zone:null}); }
+  heatmap(s){
+    const P=this.props, layer=P.layer??'Temperature', pz=P.problemZone??'Zone 9', equip=P.showEquipment??true;
+    const L={Temperature:{base:24.6,dev:5.2,unit:'°C',dp:1,w:'temp',why:'above the high limit',cause:'Heater 2 is still firing next to the tunnel inlets.'},
+      Humidity:{base:62,dev:22,unit:'% RH',dp:0,w:'air',why:'above the high humidity limit',cause:'Drinker line leak or wet litter around this zone.'},
+      Ammonia:{base:10,dev:18,unit:'ppm',dp:0,w:'air',why:'above the high NH₃ limit',cause:'Low air exchange at this end of the house.'}}[layer];
+    const pIdx=pz==='None'?-1:parseInt(pz.replace('Zone ',''))-1;
+    const pr=pIdx<0?0:Math.floor(pIdx/6), pc=pIdx<0?0:pIdx%6;
+    const r=rand(layer.length*13);
+    const sev=i=>{if(pIdx<0)return 0;const rr=Math.floor(i/6),cc=i%6,dd=Math.abs(rr-pr)+Math.abs(cc-pc);return dd===0?1:dd===1?.4:(Math.abs(rr-pr)<=1&&Math.abs(cc-pc)<=1?.2:0);};
+    const col=v=>v>=1?'#e0473a':v>0?`color-mix(in srgb,#e8705f ${Math.round(v*100)}%,#8fcdf8)`:'';
+    const zones=Array.from({length:12},(_,i)=>{
+      const sv=sev(i), n=(r()-.5)*(L.base*.03), v=L.base+n+sv*L.dev;
+      const blue=['#a9dcff','#93d1fb','#bde4ff','#86c9f5'][i%4];
+      const c=sv>0?col(sv):blue;
+      return {name:'Zone '+(i+1),val:v.toFixed(L.dp)+' '+L.unit,raw:v,sv,
+        heat:{background:c},
+        cell:{display:'flex',flexDirection:'column',justifyContent:'space-between',padding:10,cursor:'pointer',borderRight:'1px dashed rgba(29,31,32,.25)',borderBottom:i<6?'1px dashed rgba(29,31,32,.25)':'none',outline:sv>=1?'2px solid #b3261e':'none',outlineOffset:-2,position:'relative',zIndex:1},
+        valStyle:{fontFamily:'var(--font-heading)',fontSize:22,fontWeight:600,color:sv>=1?'#fff':'var(--color-text)',alignSelf:'flex-end',background:sv>=1?'#b3261e':'rgba(242,242,243,.7)',padding:'0 6px'},
+        open:()=>this.setState({open:'zone',opt:'s',zone:i+1,view:'detail'})};
+    });
+    const vals=zones.map(z=>z.raw), avg=vals.reduce((a,b)=>a+b,0)/12;
+    const marks=[];
+    [20,40,60,80].forEach(t=>marks.push({label:'',style:{position:'absolute',right:0,top:t+'%',width:8,height:'12%',transform:'translateY(-50%)',background:'var(--color-text)',zIndex:2}}));
+    [15,35,55].forEach(l=>{marks.push({label:'',style:{position:'absolute',top:0,left:l+'%',width:'6%',height:6,background:'var(--color-text)',zIndex:2}});});
+    [8,22,38,52,68].forEach(l=>{marks.push({label:'',style:{position:'absolute',top:0,left:l+'%',width:'4%',height:2,marginTop:10,background:'var(--color-neutral-700)',zIndex:2}});marks.push({label:'',style:{position:'absolute',bottom:0,left:l+'%',width:'4%',height:2,marginBottom:10,background:'var(--color-neutral-700)',zIndex:2}});});
+    [[25,50,'H1'],[75,50,'H2']].forEach(([x,y,l])=>marks.push({label:l,style:{position:'absolute',left:x+'%',top:y+'%',transform:'translate(-50%,-50%)',width:24,height:24,borderRadius:'50%',background:'var(--color-text)',color:'var(--color-bg)',fontSize:9,display:'grid',placeItems:'center',zIndex:2}}));
+    [[12,30,'T1'],[37,70,'T2'],[62,30,'T3'],[88,70,'T4']].forEach(([x,y,l])=>marks.push({label:l,style:{position:'absolute',left:x+'%',top:y+'%',transform:'translate(-50%,-50%)',width:18,height:18,borderRadius:'50%',border:'1.5px solid var(--color-text)',background:'var(--color-bg)',fontSize:8,display:'grid',placeItems:'center',zIndex:2}}));
+    const silos=[72,45,18,-1].map((p,i)=>({label:'S'+(i+1),style:{width:44,height:44,borderRadius:'50%',border:'1.5px solid var(--color-text)',display:'grid',placeItems:'center',fontSize:10,background:p<0?'repeating-linear-gradient(45deg,transparent 0 4px,var(--color-neutral-400) 4px 5px)':`conic-gradient(var(--color-accent-300) ${p}%,transparent 0)`}}));
+    const hasProblem=pIdx>=0, pzName='Zone '+(pIdx+1), pv=hasProblem?zones[pIdx].val:'';
+    const zi=(s.zone||1)-1, z=zones[zi], W0=W.find(w=>w.id===L.w), zp=z.sv>=1;
+    const zd={title:z.name+' · '+layer,crumb:'Dashboard › Schematic › '+z.name,value:z.raw.toFixed(L.dp),unit:L.unit,note:`House average ${avg.toFixed(L.dp)} ${L.unit}`,
+      statusText:zp?'Alarm':z.sv>0?'Affected':'Normal',tagClass:'tag',tagStyle:{marginLeft:'auto',background:zp?'#b3261e':z.sv>0?'#fdecea':'var(--color-neutral-100)',color:zp?'#fff':z.sv>0?'#b3261e':'var(--color-neutral-800)'},
+      now:[{k:'Zone reading',v:z.val},{k:'House average',v:avg.toFixed(L.dp)+' '+L.unit},{k:'Deviation',v:(z.raw-avg>=0?'+':'')+(z.raw-avg).toFixed(L.dp)+' '+L.unit},{k:'Nearest sensor',v:['T1','T2','T3','T4'][Math.min(3,Math.floor((zi%6)/1.5))]},{k:'Equipment in zone',v:zi%6<3?'Heater 1 · inlets':'Heater 2 · tunnel inlets'}],
+      insights:zp?[{kind:'Alarm',text:`${z.name} is ${(z.raw-avg).toFixed(L.dp)} ${L.unit} ${L.why}.`},{kind:'Likely cause',text:L.cause},{kind:'Suggestion',text:'Check the zone in person and confirm the sensor reading before changing setpoints.'}]
+        :z.sv>0?[{kind:'Observation',text:`Readings are rising next to ${pzName}.`}]:[{kind:'Observation',text:'This zone has stayed within the target band for 24 h.'}],
+      fields:W0.fields.map(r=>({k:r[0],v:r[1]})),settingsName:W0.set.toLowerCase(),settingsPath:W0.path,path:W0.path};
+    return {zones,marks,silos,equip,hasProblem,allGood:!hasProblem,layerName:layer,unit:L.unit,avg:avg.toFixed(L.dp),
+      range:`${Math.min(...vals).toFixed(L.dp)}–${Math.max(...vals).toFixed(L.dp)} ${L.unit}`,
+      banner:hasProblem?`${pzName} · ${layer} alarm`:'All zones normal',
+      bannerStyle:{fontSize:12,padding:'4px 10px',background:hasProblem?'#b3261e':'#d6ecff',color:hasProblem?'#fff':'var(--color-accent-800)'},
+      problemTitle:`${pzName} · ${pv}`,problemText:`${layer} ${L.why}. ${L.cause}`,
+      openProblem:()=>this.setState({open:'zone',opt:'s',zone:pIdx+1,view:'detail'}),zd};
+  }
+  renderVals() {
+    const s=this.state;
+    const widgets=W.map(w=>{
+      const g=w.gauge; let bands=[],markerStyle={};
+      if(g){const span=g.max-g.min;bands=g.bands.map(b=>({style:{width:((b[1]-b[0])/span*100)+'%',height:'100%',background:BAND[b[2]],borderRight:'1px solid var(--color-bg)'}}));
+        markerStyle={position:'absolute',left:`calc(${(g.val-g.min)/span*100}% - 1px)`,top:-5,bottom:-5,width:3,background:'var(--color-text)'};}
+      const silos=(w.silos||[]).map(p=>({fill:p<0?{position:'absolute',inset:0,background:'repeating-linear-gradient(45deg,transparent 0 4px,var(--color-neutral-400) 4px 5px)'}:{position:'absolute',left:0,right:0,bottom:0,height:p+'%',background:p<20?'var(--color-accent-900)':'var(--color-accent-300)'},
+        fillH:p<0?{position:'absolute',inset:0,background:'repeating-linear-gradient(45deg,transparent 0 3px,var(--color-neutral-400) 3px 4px)'}:{position:'absolute',left:0,top:0,bottom:0,width:p+'%',background:p<20?'var(--color-accent-900)':'var(--color-accent-300)'}}));
+      return {...w,hasGauge:!!g,hasSilos:!!w.silos,bands,markerStyle,silos,tagClass:TAG[w.status],
+        rows:w.rows.map(r=>({k:r[0],v:r[1]})),spark:series(w.id,24),
+        dotStyle:{width:8,height:8,borderRadius:'50%',flex:'none',background:w.status==='ok'?'var(--color-neutral-300)':w.status==='watch'?'var(--color-accent)':'var(--color-accent-900)'},
+        openA:()=>this.open('a',w.id),openB:()=>this.open('b',w.id),openC:()=>this.open('c',w.id)};
+    });
+    const lead=widgets[0];
+    const sel=W.find(w=>w.id===s.open)||W[0];
+    const inSettings=s.view==='settings';
+    const d={title:inSettings?sel.set+' settings':sel.title,crumb:inSettings?'Dashboard › '+sel.path:'Dashboard › '+sel.title,value:sel.value,unit:sel.unit,note:sel.note,statusText:sel.statusText,tagClass:TAG[sel.status],
+      now:sel.now.map(r=>({k:r[0],v:r[1]})),insights:sel.insights.map(r=>({kind:r[0],text:r[1]})),fields:sel.fields.map(r=>({k:r[0],v:r[1]})),settingsName:sel.set.toLowerCase(),settingsPath:sel.path};
+    const R={'24h':[24,'Last 24 hours, hourly'],'7d':[28,'Last 7 days, 6-hourly'],'flock':[42,'Flock day 0–28 vs previous flock']};
+    const tabsDef=[['now','Now'],['trend','Over time'],['insights','Insights'],['settings','Settings']];
+    const hm=this.heatmap(s);
+    if(s.opt==='s'&&s.zone&&!inSettings){Object.assign(d,hm.zd);}
+    if(s.opt==='s'&&s.zone&&inSettings){d.crumb='Dashboard › '+hm.zd.path;}
+    widgets.forEach(w=>{w.openS=()=>this.setState({open:w.id,opt:'s',zone:null,view:'detail'});});
+    const LN=['Temperature','Humidity','Ammonia'];
+    return {
+      hm, openS:s.open&&s.opt==='s',
+      layers:LN.map(l=>({label:l,style:l===hm.layerName?{background:'var(--color-accent-100)',color:'var(--color-accent-800)'}:{}})),
+      widgets, lead, others:widgets.slice(1), attention:widgets.filter(w=>w.status!=='ok'),
+      openA:s.open&&s.opt==='a', openB:s.open&&s.opt==='b', openC:s.open&&s.opt==='c',
+      d, inSettings, inDetail:!inSettings, trend:series(sel.id,R[s.range][0]), rangeNote:R[s.range][1],
+      ranges:[['24h','24 h'],['7d','7 days'],['flock','Flock']].map(([k,l])=>({label:l,pick:()=>this.setState({range:k}),style:s.range===k?{background:'var(--color-accent-100)',color:'var(--color-accent-800)'}:{}})),
+      tabs:tabsDef.map(([k,l])=>({label:l,pick:()=>this.setState({tab:k}),style:{borderRadius:0,padding:'10px 16px',color:s.tab===k?'var(--color-text)':'var(--color-neutral-700)',borderBottom:s.tab===k?'2px solid var(--color-accent)':'2px solid transparent'}})),
+      tabNow:s.tab==='now',tabTrend:s.tab==='trend',tabInsights:s.tab==='insights',tabSettings:s.tab==='settings',
+      close:()=>this.setState({open:null}), back:()=>this.setState({view:'detail'}), toSettings:()=>this.setState({view:'settings'}), goSettingsTab:()=>this.setState({tab:'settings'})
+    };
+  }
+}
+</script>
+</body>
+</html>

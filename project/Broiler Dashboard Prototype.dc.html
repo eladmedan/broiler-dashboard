@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#f2f2f3"><svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#f2f2f3"></rect><polyline points="30,40 48,40 54,26 62,54 70,32 76,40 90,40" fill="none" stroke="#5980a6" stroke-width="3"></polyline></svg></template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/industry-026b1232-3228-4a33-bc0f-1951ba873b1c/styles.css">
+<script src="_ds/industry-026b1232-3228-4a33-bc0f-1951ba873b1c/_ds_bundle.js"></script>
+<style>body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body)}a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-900)}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid var(--color-divider)}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:var(--color-text);color:var(--color-bg);border-radius:4px;text-decoration:none}.dv-tname{font:600 15px/1.2 var(--font-heading);letter-spacing:.02em}.dv-opts{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:var(--color-neutral-200);color:var(--color-text);border-radius:4px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font-size:12px;color:var(--color-neutral-700)}.dv-card{background:var(--color-bg);border:1px solid var(--color-divider);overflow:hidden;position:relative}.dv-opt:target .dv-oid{background:var(--color-accent);color:#fff}.dv-next{margin:22px 0 0;font-size:12px;color:var(--color-neutral-700)}</style>
+</helmet>
+<section class="dv-turn" id="t3">
+<div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Responsive widget dashboard — Options: screen, connected devices, house view, air flow states. Click any widget to drill down.</span></div>
+<div class="dv-opts">
+<sc-for list="{{ dirs }}" as="o" hint-placeholder-count="3">
+<div class="dv-opt" id="{{ o.id }}">
+  <div class="dv-olabel"><a class="dv-oid" href="{{ o.href }}">{{ o.id }}</a>{{ o.label }}</div>
+  <div class="dv-card" style="{{ o.frameStyle }}">
+    <sc-if value="{{ o.desk }}">
+      <div style="width:232px;flex:none;box-sizing:border-box;border-right:1px solid var(--color-divider);display:flex;flex-direction:column;padding:0 0 16px">
+        <div style="height: 62px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 20px; border-bottom: 1px solid var(--color-divider); width: 231px">
+          <img src="assets/rotem-logo.svg" alt="Rotem" style="height:22px;width:auto;display:block">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:2px;padding:16px 12px">
+          <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700);padding:0 8px 6px">Farms</span>
+          <span style="padding:6px 8px;font-weight:600;font-size:14px">Green Valley</span>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 8px 6px 20px;font-size:13px"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-neutral-300)"></span>House 1</div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 8px 6px 20px;font-size:13px"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-neutral-300)"></span>House 2</div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 8px 6px 20px;font-size:13px;background:var(--color-accent-100);font-weight:600"><span style="width:7px;height:7px;border-radius:50%;background:#b3261e"></span>House 3</div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 8px 6px 20px;font-size:13px"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent)"></span>House 4</div>
+          <div style="display:flex;justify-content:space-between;padding:10px 8px 6px;font-size:14px"><span>Hillside</span><span style="color:var(--color-neutral-700);font-size:12px">2 houses</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 8px;font-size:14px"><span>Riverbend</span><span style="color:var(--color-neutral-700);font-size:12px">3 houses</span></div>
+        </div>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:2px;padding:0 12px">
+          <div style="display:flex;justify-content:space-between;padding:8px;font-size:14px"><span>Alarms</span><span class="tag" style="background:#b3261e;color:#fff">3</span></div>
+          <div style="padding:8px;font-size:14px">Reports</div>
+          <div style="padding:8px;font-size:14px">Farm settings</div>
+        </div>
+      </div>
+    </sc-if>
+    <div style="{{ o.mainStyle }}">
+      <sc-if value="{{ o.tab }}">
+        <div style="height:52px;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:0 20px;border-bottom:1px solid var(--color-divider);font-size:13px">
+          <button class="btn btn-ghost btn-icon">☰</button>
+          <span style="font-family:var(--font-heading);font-size:18px;font-weight:600">Flock Vitals</span>
+          <span style="margin-right:auto;padding:4px 10px;border:1px solid var(--color-neutral-400)">Green Valley › House 3 ▾</span>
+          <span style="width:30px;height:30px;border-radius:50%;background:var(--color-accent-100);display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--color-accent-900)">EL</span>
+        </div>
+      </sc-if>
+      <div style="height:64px;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:0 20px;border-bottom:1px solid var(--color-divider);overflow:hidden">
+        <div style="display:flex;flex-direction:column;margin-right:auto;min-width:0">
+          <div style="display:flex;align-items:center;gap:10px">
+            <button class="btn btn-ghost btn-icon" onClick="{{ goHome }}" aria-label="Dashboard home" style="padding:6px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path><path d="M10 21v-6h4v6"></path></svg></button>
+            <span style="font-family:var(--font-heading);font-size:26px;font-weight:600;line-height:1">House 3</span>
+            <span style="{{ o.modeChipStyle }}"><span style="{{ o.modeDotStyle }}"></span>{{ o.mode }}</span>
+            <div style="display:flex;flex-direction:column;line-height:1.1;white-space:nowrap;margin-left:6px"><span style="font-family:var(--font-heading);font-size:18px;font-weight:600">Day {{ o.day }}</span><span style="font-size:12px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ clock }}</span></div>
+          </div>
+          
+        </div>
+        
+        <button class="{{ o.alarmClass }}" onClick="{{ o.toggleNotif }}" style="{{ o.alarmStyle }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"></path></svg>{{ o.alarmText }}</button>
+        <button class="btn btn-secondary" onClick="{{ o.openMenu }}" style="white-space:nowrap;gap:8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>Menu</button>
+        
+        <sc-if value="{{ o.hasOutputs }}"><button class="btn btn-secondary" onClick="{{ o.openOutputs }}" style="white-space:nowrap;gap:8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="1"></rect><circle cx="7" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="17" cy="12" r="1.5"></circle></svg>Outputs<span class="tag tag-neutral" style="padding:1px 6px">{{ o.outputsBadge }}</span></button></sc-if>
+        
+        
+      </div>
+      <sc-if value="{{ o.isEmpty }}"><div style="margin:20px 20px -8px;padding:10px 14px;border:1px dashed var(--color-neutral-500);font-size:13px;color:var(--color-neutral-800);display:flex;gap:12px;align-items:center"><b>House empty</b><span>Cleaning and disinfection since 2 Oct. Readings are paused; alarms limited to fire, water leak and power.</span><button class="btn btn-secondary" style="margin-left:auto">Start pre heat</button></div></sc-if>
+      <div style="{{ o.bodyStyle }}">
+        <sc-for list="{{ o.labels }}" as="l"><span style="{{ l.style }}">{{ l.text }}</span></sc-for>
+        <sc-for list="{{ o.slots }}" as="s"><div style="{{ s.style }}"><sc-if value="{{ s.isScheme }}"><dc-import name="HouseScheme" view="{{ o.schemeView }}" dims="{{ s.dims }}" lines="{{ o.schemeLines }}" zones="{{ o.schemeZones }}" target="{{ o.target }}" on-open-light="{{ s.openLight }}" on-open-temp="{{ s.openTemp }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></sc-if><sc-if value="{{ s.isWidget }}"></sc-if><dc-import name="DashboardWidget" compact="{{ o.ctrl }}" temp-gauge="{{ o.tempGauge }}" vent-layout="{{ o.ventLayout }}" w="{{ s.w }}" size="{{ s.size }}" dims="{{ s.dims }}" variant="{{ o.variant }}" badge="{{ o.badge }}" alarm="{{ s.alarm }}" on-open="{{ s.open }}" on-open-press="{{ s.openPress }}" on-action="{{ s.action }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></div></sc-for>
+        <sc-if value="{{ o.toast.on }}">
+          <div class="blueprint" style="{{ o.toast.s }}">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--color-accent-700)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="m8 12 3 3 5-6"></path></svg>
+            <div style="display:flex;flex-direction:column;gap:1px;min-width:0;margin-right:auto"><span style="font-size:14px;font-weight:600">Mortality added</span><span style="font-size:12px;color:var(--color-neutral-700)">{{ o.toast.t }}</span></div>
+            <button class="btn btn-ghost" onClick="{{ o.toast.undo }}" style="padding:0 8px">Undo</button>
+            <button class="btn btn-ghost btn-icon" onClick="{{ o.toast.close }}">✕</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ o.m.open }}">
+          <div onClick="{{ o.m.close }}" style="position:absolute;inset:0;background:rgba(29,31,32,.32);z-index:60"></div>
+          <div class="blueprint" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(460px,calc(100% - 32px));background:var(--color-bg);box-shadow:var(--shadow-lg);z-index:61;display:flex;flex-direction:column">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--color-divider)">
+              <div style="display:flex;flex-direction:column;margin-right:auto;min-width:0">
+                <span style="font-size:11px;color:var(--color-neutral-700)">{{ o.m.crumb }}</span>
+                <span style="font-family:var(--font-heading);font-size:22px;font-weight:600;line-height:1.1">Add mortality</span>
+              </div>
+              <button class="btn btn-secondary btn-icon" onClick="{{ o.m.close }}">✕</button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;padding:16px">
+              <sc-for list="{{ o.m.rows }}" as="row">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="flex:1 1 auto;font-size:15px;font-weight:600">{{ row.k }}</span>
+                  <button class="btn btn-secondary btn-icon" onClick="{{ row.dec }}" disabled="{{ row.atZero }}" style="width:44px;height:44px;font-size:20px">−</button>
+                  <input class="input" type="number" min="0" value="{{ row.v }}" onChange="{{ row.set }}" style="width:96px;height:44px;box-sizing:border-box;text-align:center;font-family:var(--font-heading);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums"></input>
+                  <button class="btn btn-primary btn-icon" onClick="{{ row.inc }}" style="width:44px;height:44px;font-size:20px">+</button>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;padding:12px 16px;border-top:1px solid var(--color-divider)">
+              <button class="btn btn-ghost" onClick="{{ o.m.goBirds }}" style="margin-right:auto;padding-left:0">Open bird management →</button>
+              <button class="btn btn-secondary" onClick="{{ o.m.close }}">Cancel</button>
+              <button class="btn btn-primary" onClick="{{ o.m.add }}" disabled="{{ o.m.none }}">Add</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ o.drawerOpen }}">
+          <div onClick="{{ close }}" style="{{ o.scrimStyle }}"></div>
+          <div style="{{ o.xStyle }}"><div style="{{ o.xInner }}"><dc-import name="WidgetDrawer" wide="{{ true }}" w="{{ o.dw }}" crumb="{{ o.crumb }}" on-close="{{ close }}" hint-size="100%,100%" style="width:100%;height:100%"></dc-import></div></div>
+        </sc-if>
+      </div>
+    </div>
+    <sc-if value="{{ o.menuOpen }}">
+      <div onClick="{{ closeMenu }}" style="{{ o.menuScrim }}"></div>
+      <div style="{{ o.menuPanel }}">
+        <div style="width:190px;flex:none;display:flex;flex-direction:column;background:var(--color-text)">
+          <div style="height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;color:var(--color-bg);border-bottom:1px solid rgba(255,255,255,.12)"><span style="font-family:var(--font-heading);font-size:20px;font-weight:600">Menu</span></div>
+          <sc-for list="{{ o.cats }}" as="c">
+            <div onClick="{{ c.pick }}" style="{{ c.style }}">
+              <span style="font-size:18px;font-weight:600">{{ c.label }}</span>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><g style="{{ c.i1 }}"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0Z"></path><path d="M14 7h2M14 10h2"></path></g><g style="{{ c.i2 }}"><circle cx="12" cy="12" r="9"></circle><path d="M12 12 7.5 7.5"></path></g><g style="{{ c.i3 }}"><path d="M7 18c-2-2-3-5-2-8l3 2c1-3 3-5 6-5l-1 2c3 0 5 2 5 5 0 3-3 5-6 5H9"></path><path d="M11 19v3M9 22h4"></path><circle cx="15" cy="9" r=".6"></circle></g><g style="{{ c.i4 }}"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"></path></g></svg>
+              <div style="{{ c.notch }}"></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;background:var(--color-bg);min-width:0">
+          <div style="height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 16px 0 24px;border-bottom:1px solid var(--color-divider)"><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700)">{{ o.catLabel }}</span><button class="btn btn-secondary btn-icon" onClick="{{ closeMenu }}">✕</button></div>
+          <div style="display:flex;flex-direction:column;padding:8px 24px;overflow:auto">
+            <sc-for list="{{ o.subs }}" as="s">
+              <div style="display:flex;align-items:center;gap:14px;padding:16px 4px;border-bottom:1px solid var(--color-divider);cursor:pointer" style-hover="background:var(--color-accent-100)">
+                <span style="font-size:16px;flex:1">{{ s.t }}</span><span style="color:var(--color-neutral-500);font-size:18px">›</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ o.notifOpen }}">
+      <div onClick="{{ closeMenu }}" style="position:absolute;inset:0;z-index:30"></div>
+      <div style="{{ o.notifStyle }}">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--color-divider)"><span style="font-family:var(--font-heading);font-size:18px;font-weight:600">Notifications</span><span style="font-size:12px;color:var(--color-neutral-700)">{{ o.alarmText }}</span></div>
+        <sc-for list="{{ o.notifs }}" as="n">
+          <div onClick="{{ n.go }}" style="display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid var(--color-divider);cursor:pointer" style-hover="background:var(--color-accent-100)">
+            <span style="{{ n.dot }}"></span>
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:14px;font-weight:600">{{ n.title }}</span><span style="font-size:11px;color:var(--color-neutral-700);white-space:nowrap">{{ n.time }}</span></div><span style="font-size:13px;color:var(--color-neutral-800);line-height:1.4">{{ n.text }}</span><span style="font-size:12px;color:var(--color-accent-700)">Open {{ n.title }} →</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</sc-for>
+</div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;viewport&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;SaaS desktop&quot;,&quot;Controller screen&quot;,&quot;SaaS tablet&quot;],&quot;default&quot;:&quot;SaaS desktop&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Responsive&quot;},&quot;devices&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Minimum · 2&quot;,&quot;Typical · 7&quot;,&quot;Full · 10&quot;],&quot;default&quot;:&quot;Full · 10&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Responsive&quot;},&quot;houseView&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Widgets&quot;},&quot;ventDriver&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;None&quot;,&quot;Heating&quot;,&quot;Cooling&quot;,&quot;CO2&quot;,&quot;NH3&quot;,&quot;RH&quot;],&quot;default&quot;:&quot;Heating&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Air flow&quot;},&quot;inletsClosed&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Air flow&quot;},&quot;pressureError&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Air flow&quot;}}">
+const ALARM_PROP={temp:'alarmTemperature',vent:'alarmVentilation',press:'alarmPressure',air:'alarmAirQuality',silo:'alarmSilos',wf:'alarmWaterFeed',water:'alarmWaterFeed',feed:'alarmWaterFeed',birds:'alarmBirds',light:'alarmLight'};
+const DATA=[
+{id:'temp',title:'Temperature',value:'24.6',unit:'°C',status:'watch',statusText:'Sensor drift',note:'Target 25.0 °C',
+ gauge:{min:19,max:32,val:24.6,bands:[[19,21,3],[21,24,1],[24,27,2],[27,30,1],[30,32,3]],labels:[[24,'Heat 24'],[27,'Cool 27']],sets:[[24,'Heat'],[25,'Target',1],[27,'Cool'],[28,'Tunnel']]},
+ rows:[['Back sensor','23.8 °C'],['Middle sensor','25.9 °C',1],['Front sensor','24.3 °C'],['Windchill','— tunnel off']],
+ today:[['Min','23.8 °C'],['Max','25.9 °C'],['Avg','24.7 °C']],spark:true,alert:'Sensor 3 reads +1.8° above house average',
+ chart:{lo:20,hi:30,tLo:24,tHi:26,unit:'°C',dp:1},
+ d:{tmap:{avg:24.6,target:25.0,outside:14.8,
+   sensors:[{k:'T1',loc:'West · entrance side',x:14,y:30,v:24.2},{k:'T2',loc:'Centre-west · floor',x:38,y:68,v:24.4},{k:'T3',loc:'Centre-east · near heater 2',x:68,y:34,v:26.4,al:1},{k:'T4',loc:'East · tunnel end',x:88,y:68,v:24.1}],
+   heaters:[{k:'H1',x:28,y:50,on:0},{k:'H2',x:74,y:50,on:1}]},perf:[['In target band','91%','today'],['vs last flock','+4 pts','same day'],['Farm rank','2 of 4','houses']],
+  notes:{trend:'Stayed inside the target band 91% of the last 24 h.',compare:'Steadier than last flock — daily swing 1.1° vs 2.4°.',bench:'Tracking the recommended curve for day 28 within ±0.4°.'},
+  compareLabel:'Last flock',benchLabel:'Recommended curve',
+  subs:[['Sensor 1','24.2 °C','ok'],['Sensor 2','24.4 °C','ok'],['Sensor 3','26.4 °C','alert','+1.8° vs average for 3 h — near heater 2'],['Sensor 4','24.1 °C','ok'],['Outside','14.8 °C','ok']],
+  insights:[['Suggestion','Exclude sensor 3 from the house average until checked, or move it away from heater 2.'],['Trend','Daily swing narrowed from 2.4° to 1.1° over the past week.']],
+  path:'Climate › Temperature',settings:[{t:'Curve',f:[['Target · day 28','25.0 °C'],['Night shift','−0.5 °C']]},{t:'Offsets',f:[['Heat','−1.0 °C'],['Cool','+2.0 °C'],['Tunnel','+3.0 °C']]},{t:'Alarms',f:[['Low','21.0 °C'],['High','30.0 °C']]},{t:'Sensors',f:[['Average uses','1, 2, 3, 4'],['Calibrate','Sensor 3']]}]}},
+{id:'vent',title:'Air flow',value:'P3',unit:'Power',vOut:'48%',status:'ok',statusText:'Cycling',note:'Power ventilation · cycling 10 s on / 10 s off',
+ vent:{cfm:'84,200',cur:9,min:4,minL:'L4',max:18,maxL:'T6',cycle:[10,10],sp:{v:18,target:20,band:5,low:5,high:35,min:0,max:40},fans:[['side','Side',4,6],['tunnel','Tunnel',0,4],['stir','Stir',1,2]],inlets:[['Left',[[45],[44]]],['Right',[[12,1],[41]]]]},
+ gauge:{min:0,max:18,val:9,bands:[[0,6,1],[6,12,2],[12,18,1]],labels:[[0,'Min L1–6'],[9,'Power P1–6'],[15,'Tunnel T1–6']]},
+ rows:[],
+ today:[['Max level','P4'],['Tunnel','0 h']],
+ chart:{lo:0,hi:18,tLo:6,tHi:12,unit:'level',dp:0},
+ d:{map:{cur:9,min:4,max:18,mode:'Power ventilation',output:38,
+   fans:[{t:'Side fans',f:[['Fan 1',100],['Fan 2',75],['Fan 3',0],['Fan 4',100],['Fan 5',60],['Fan 6',0]]},{t:'Tunnel fans',f:[['Fan 7',0],['Fan 8',0],['Fan 9',0],['Fan 10',0]]},{t:'Stir fans',f:[['Stir 1',80],['Stir 2',0]]}],
+   inlets:[['Left',[['L1',45],['L2',44]]],['Right',[['R1',12,1],['R2',41]]]]},perf:[['Energy','312 kWh','−6% vs last flock'],['Air exchange','2.3 /h','min 2.0']],
+  notes:{trend:'Held power ventilation since 07:40; peaked at P4 at 14:10.',compare:'Running one level lower than last flock at day 28.',bench:'Air exchange is 15% above the minimum for this bird weight.'},
+  compareLabel:'Last flock',benchLabel:'Minimum ventilation',
+  subs:[['Side fans','4 / 6','ok'],['Tunnel fans','0 / 4','ok'],['Stir fans','1 / 2','ok'],['Cycle timer','10 / 10 s','ok']],
+  insights:[['Suggestion','Check right inlet R1 — it is lagging at 12% opening.'],['Observation','No tunnel transitions in the last 48 h.']],
+  path:'Ventilation › Levels',settings:[{t:'Levels',f:[['Min level','L4'],['Max level','T6'],['Cycle on / off','10 / 10 s']]},{t:'Fans',f:[['Side fans','6'],['Tunnel fans','4'],['Stir fans','2']]}]}},
+{id:'press',title:'Pressure',value:'18',unit:'Pa',status:'ok',statusText:'In band',note:'Target 20 ±5 Pa',
+ press:{v:18,target:20,band:5,low:5,high:35,min:0,max:40},
+ rows:[],today:[['Max','26 Pa'],['Min','14 Pa'],['In band','86%']],
+ chart:{lo:0,hi:40,tLo:15,tHi:25,unit:'Pa',dp:0},
+ d:{perf:[['In band','86%','today'],['Avg','19 Pa','today'],['Peak','26 Pa','14:10']],
+  notes:{trend:'Pressure dipped 2 Pa under target during fan ON cycles.',compare:'Similar to last flock at day 28.',bench:'Within the recommended band for power ventilation.'},
+  compareLabel:'Last flock',benchLabel:'Target band',
+  subs:[['Static pressure','18 Pa','ok'],['Target','20 ±5 Pa','ok'],['Low / High alarm','5 / 35 Pa','ok']],
+  insights:[['Suggestion','Check the right-side inlet at 12% — pressure drops on that wall.'],['Observation','No pressure alarms in the last 48 h.']],
+  path:'Ventilation › Pressure',settings:[{t:'Pressure',f:[['Target','20 Pa'],['Band','±5 Pa'],['Low / High alarm','5 / 35 Pa']]}]}},
+{id:'air',title:'Air quality',value:'68',unit:'% RH',status:'watch',statusText:'Treating',note:'CO₂ 2,100 ppm · NH₃ 12 ppm',
+ dials:[{label:'Humidity · % RH',txt:'68',v:68,min:30,max:100,zone:[50,65],high:80,st:'watch'},{label:'CO₂ · ppm',txt:'2.1k',v:2100,min:0,max:5000,zone:[0,3000],high:4000,st:'ok'},{label:'NH₃ · ppm',txt:'12',v:12,min:0,max:40,zone:[0,20],high:30,st:'ok'}],
+ gauge:{min:30,max:100,val:68,bands:[[30,50,1],[50,65,2],[65,80,1],[80,100,3]],labels:[[65,'Treat 65'],[80,'High 80']]},
+ rows:[['Humidity','68 %'],['CO₂','2,100 ppm · set 3,000'],['NH₃','12 ppm · set 20'],['Treatment from','65 %'],['Treatment','RH on · CO₂ off · NH₃ off'],['High humidity','80 %']],
+ today:[['RH max','74 %'],['CO₂ max','2,650'],['NH₃ max','14 ppm']],alert:'RH treatment on · falling 1% / 10 min',
+ chart:{lo:40,hi:90,tLo:50,tHi:65,unit:'% RH',dp:0},
+ d:{perf:[['RH in band','78%','today'],['CO₂ under limit','100%','today'],['NH₃ under limit','100%','today']],
+  notes:{trend:'RH crosses 65% most mornings between 06:00 and 08:00.',compare:'Mornings are 6% more humid than last flock.',bench:'CO₂ and NH₃ stay well under welfare limits.'},
+  compareLabel:'Last flock',benchLabel:'Welfare guideline',
+  subs:[['Humidity','68 %','watch','Treatment running'],['CO₂','2,100 ppm','ok'],['NH₃','12 ppm','ok'],['Outside humidity','82 %','ok']],
+  insights:[['Suggestion','Raise minimum ventilation one level from 05:30 to prevent the morning peak.'],['Observation','Treatment is shorter each day — litter is drying.']],
+  path:'Climate › Air quality',settings:[{t:'Humidity',f:[['Treatment from','65 %'],['High alarm','80 %']]},{t:'CO₂',f:[['Setpoint','3,000 ppm'],['High alarm','4,000 ppm']]},{t:'NH₃',f:[['Setpoint','20 ppm'],['High alarm','30 ppm']]}]}},
+{id:'silo',title:'Silos',value:'13.5',unit:'t',status:'alert',statusText:'Order feed',note:'4 silos · 2 under 1 week of feed',
+ bars:[['S1',72,0,'Grower',7.2,12],['S2',45,1,'Grower',4.5,6],['S3',18,1,'Starter',1.8,5],['S4',-1,1,'Grower',null,null]],
+ rows:[['S3 · Starter','1.8 t · 5 days',1],['S2 · Grower','4.5 t · 6 days',1],['S1 · Grower','7.2 t · 12 days'],['S4 · Grower','No reading',1],['Notify at','7 days left']],
+ today:[['Used','2,110 kg'],['Delivered','0 kg']],alert:'S2 and S3 have under 1 week of feed — order now',
+ chart:{lo:0,hi:20000,tLo:4000,tHi:16000,unit:'kg',dp:0},
+ d:{perf:[['Grower left','11.7 t','~8 days'],['Starter left','1.8 t','~5 days'],['Next delivery','—','not booked']],
+  notes:{trend:'Stock fell 2.1 t in 24 h with no delivery.',compare:'Using 3% more feed per day than last flock.',bench:'Two silos are under the 7-day notify level.'},
+  compareLabel:'Last flock',benchLabel:'Safety stock',
+  silos:[{n:'Silo 1',type:'Grower',t:7.2,cap:10,pct:72,days:12,out:'Mon 19 Oct',use:'610 kg/day',last:'2 Oct · 9.5 t',temp:'21 °C'},
+   {n:'Silo 2',type:'Grower',t:4.5,cap:10,pct:45,days:6,out:'Tue 13 Oct',use:'750 kg/day',last:'26 Sep · 10 t',temp:'22 °C'},
+   {n:'Silo 3',type:'Starter',t:1.8,cap:10,pct:18,days:5,out:'Mon 12 Oct',use:'360 kg/day',last:'18 Sep · 8 t',temp:'21 °C'},
+   {n:'Silo 4',type:'Grower',t:null,cap:10,pct:-1,days:null,out:'—',use:'—',last:'30 Sep · 10 t',temp:'—',err:'Load cell offline since 10:42'}],
+  order:{grower:8,starter:4,date:'Fri 9 Oct · morning',supplier:'Northfield Feed Mill'},
+  subs:[['Silo 1 · Grower','7.2 t · 12 days','ok'],['Silo 2 · Grower','4.5 t · 6 days','watch','Under 1 week — runs out Tue 13 Oct'],['Silo 3 · Starter','1.8 t · 5 days','watch','Under 1 week — runs out Mon 12 Oct'],['Silo 4 · Grower','—','alert','Load cell not reporting since 10:42']],
+  insights:[['Notification','S2 (Grower) and S3 (Starter) crossed the 7-day level. Book a delivery of about 8 t grower and 4 t starter.'],['Suggestion','Check the silo 4 load cell cable before the next weighing.']],
+  path:'Feed › Silos',settings:[{t:'Silos',f:[['Count','4'],['Capacity each','10 t']]},{t:'Feed & notifications',f:[['S1 · S2 · S4 feed','Grower'],['S3 feed','Starter'],['Notify when feed lasts','7 days'],['Low level','20 %']]},{t:'Load cells',f:[['Calibrate','Silo 4'],['Zero offset','0 kg']]}]}},
+{id:'water',title:'Daily water',value:'3,840',unit:'L',status:'ok',statusText:'Normal',note:'+4.2% vs yesterday',spark:true,
+ rows:[['vs yesterday','+4.2 %'],['Water / feed','1.82'],['Per bird','208 ml'],['Line pressure','32 cm'],['Pressure alarm','None'],['Emergency','Off']],
+ today:[['Total','3,840 L'],['Per bird','208 ml'],['W / F','1.82']],
+ chart:{lo:0,hi:400,tLo:120,tHi:260,unit:'L/h',dp:0},
+ d:{perf:[['Water / feed','1.82','target 1.7–2.0'],['vs breed','+3%','per bird'],['Leaks','None','detected']],
+  notes:{trend:'Hourly use peaks at lights-on and at 17:00.',compare:'Rising 4–5% a day, in line with last flock.',bench:'Per-bird intake is 3% above the breed standard.'},
+  compareLabel:'Last flock',benchLabel:'Breed standard',
+  subs:[['Meter 1','1,960 L','ok'],['Meter 2','1,880 L','ok'],['Line pressure','32 cm','ok'],['Emergency pressure','Off','ok']],
+  insights:[['Observation','Consumption tracks age; no sign of leaks or blocked lines.']],
+  path:'Water › Meters',settings:[{t:'Alarms',f:[['High use','+20 %'],['Low use','−20 %']]},{t:'Pressure',f:[['Line','32 cm'],['Emergency','55 cm']]}]}},
+{id:'feed',title:'Daily feed',value:'2,110',unit:'kg',status:'ok',statusText:'Normal',note:'−1.3% vs yesterday',spark:true,
+ rows:[['vs yesterday','−1.3 %'],['Per bird','115 g'],['Feeder program','Ad lib'],['Feed alarm','None']],
+ today:[['Total','2,110 kg'],['Per bird','115 g']],
+ chart:{lo:0,hi:200,tLo:60,tHi:140,unit:'kg/h',dp:0},
+ d:{perf:[['FCR','1.48','target 1.52'],['vs breed','−1%','intake'],['Feeder runs','14','today']],
+  notes:{trend:'Intake dipped after 11:00 while temperature stayed on target.',compare:'Within 1% of last flock.',bench:'1% under breed intake.'},
+  compareLabel:'Last flock',benchLabel:'Breed standard',
+  subs:[['Feeder line 1','1,070 kg','ok'],['Feeder line 2','1,040 kg','ok'],['Pan sensor','Full','ok']],
+  insights:[['Observation','Watch for a second day of lower intake before acting.']],
+  path:'Feed › Consumption',settings:[{t:'Alarms',f:[['Under-feed','−15 %'],['Over-feed','+15 %']]},{t:'Program',f:[['Mode','Ad lib'],['Restrict from','—']]}]}},
+{id:'birds',title:'Birds',value:'1.42',unit:'kg avg',status:'ok',statusText:'+2% curve',note:'18,420 birds · mortality 2.1%',spark:true,
+ rows:[['Male','1.51 kg'],['Female','1.33 kg'],['Birds','18,420'],['Mortality','2.1 % · 392'],['FCR','1.48'],['Daily gain','78 g']],
+ today:[['Deaths','6'],['Culls','2'],['Weighed','412']],
+ chart:{lo:0,hi:2,tLo:1.3,tHi:1.5,unit:'kg',dp:2,grow:true},
+ d:{bmap:{placed:18812,now:18420,day:28,market:42,fcr:1.48,mortToday:6,
+   sexes:[{k:'Male',type:'rooster',score:88,w:1.51,curve:1.48,gain:84,unif:84,cv:9.1,mort:1.9,count:9260,act:'Active · eating well'},
+          {k:'Female',type:'hen',score:72,w:1.33,curve:1.35,gain:71,unif:76,cv:11.8,mort:2.3,count:9160,act:'Less uniform · check feeder space'}],
+   growth:{days:[0,7,14,21,28],male:[0.042,0.19,0.50,0.98,1.51],female:[0.042,0.18,0.46,0.88,1.33],curve:[0.042,0.185,0.48,0.93,1.42]},
+   hist:{bins:['1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8'],male:[1,2,5,10,18,26,21,11,6],female:[3,8,15,24,22,15,8,4,1]},
+   mort:[14,12,10,9,8,8,7,9,6,7,6,5,7,6]},perf:[['vs breed curve','+2%','weight'],['Uniformity','84%','CV 9.2'],['Mortality','2.1%','farm avg 2.4%']],
+  notes:{trend:'Daily gain averaged 78 g over the last 7 days.',compare:'40 g heavier than last flock at day 28.',bench:'2% above the Ross 308 curve.'},
+  compareLabel:'Last flock',benchLabel:'Ross 308 curve',
+  subs:[['Male','1.51 kg','ok'],['Female','1.33 kg','ok'],['Uniformity','84 %','ok'],['Mortality today','6','ok']],
+  insights:[['Trend','Growth is ahead of curve; keep the day-35 feed change on schedule.']],
+  path:'Flock › Birds',settings:[{t:'Flock',f:[['Placed','18,812'],['Breed curve','Ross 308']]},{t:'Weighing',f:[['Scale','Platform 1'],['Min weight','0.3 kg']]}]}},
+{id:'light',title:'Light',value:'3 / 4',unit:'lines on',status:'ok',statusText:'On',note:'18 lux avg · off at 22:00',
+ lines:[['L1',true,62],['L2',true,62],['L3',true,35],['L4',false,0]],
+ rows:[['Output','62 %'],['Next change','Off 22:00'],['Service light','Off']],
+ today:[['On','18 h'],['Avg','19 lux']],
+ chart:{lo:0,hi:30,tLo:15,tHi:22,unit:'lux',dp:0},
+ d:{lmap:{target:20,on:'04:00',off:'22:00',dim:'15 min',
+   rows:[{k:'L1',on:1,pct:62,color:'Warm white',kelvin:3000,hex:'#ffe98a',lux:[19,20,21,20,19,20,21,20]},
+     {k:'L2',on:1,pct:62,color:'Warm white',kelvin:3000,hex:'#ffe98a',lux:[20,21,22,21,21,20,22,21]},
+     {k:'L3',on:1,pct:35,color:'Blue',kelvin:null,hex:'#8fb8ff',lux:[11,12,12,11,8,12,11,12],dim:4},
+     {k:'L4',on:0,pct:0,color:'Warm white',kelvin:3000,hex:'#ffe98a',lux:[0,0,0,0,0,0,0,0]}]},perf:[['Program kept','100%','today'],['Intensity','−3 lux','vs placement'],['Dark period','6 h','target 6']],
+  notes:{trend:'Program ran on schedule.',compare:'Same program as last flock.',bench:'Dark period meets the welfare minimum.'},
+  compareLabel:'Last flock',benchLabel:'Welfare minimum',
+  subs:[['Line 1','On · 62 %','ok'],['Line 2','On · 62 %','ok'],['Line 3','On · 35 %','watch','Dimmed for brooding area'],['Line 4','Off','ok'],['Measured intensity','18 lux','ok']],
+  insights:[['Suggestion','Line 4 is scheduled off; turn on from day 30 for even light across the house.']],
+  path:'Light › Program',settings:[{t:'Program',f:[['On','04:00'],['Off','22:00'],['Intensity','62 %']]},{t:'Dimming',f:[['Sunrise','15 min'],['Sunset','15 min']]}]}},
+{id:'output',title:'Outputs',value:'14',unit:'/ 32 on',status:'ok',statusText:'Normal',note:'Relays · 3 analog outputs',
+ rows:[['Relays on','14 of 32'],['Analog outputs','3 active'],['Manual override','None'],['Faults','None']],
+ today:[['Switches','1,284'],['Faults','0']],
+ chart:{lo:0,hi:32,tLo:10,tHi:20,unit:'relays',dp:0},
+ d:{perf:[['Faults','0','7 days'],['Overrides','0','today'],['Uptime','99.9%','30 days']],
+  notes:{trend:'Normal switching pattern.',compare:'Same switching load as last flock.',bench:'No relay over its rated switch count.'},
+  compareLabel:'Last flock',benchLabel:'Rated load',
+  subs:[['Heaters','2 / 2','ok'],['Fans','5 / 12','ok'],['Feeders','2 / 2','ok'],['Lights','4 / 4','ok']],
+  insights:[['Observation','No relay faults in the last 7 days.']],
+  path:'Installation › Outputs',settings:[{t:'Relays',f:[['Layout','32 relays'],['Test mode','Off']]},{t:'Analog',f:[['AO devices','3']]}]}}
+];
+(()=>{const W=DATA.find(x=>x.id==='water'),F=DATA.find(x=>x.id==='feed'),wd=W.d||{},fd=F.d||{};
+  DATA.push({id:'wf',title:'Water & feed',value:'',unit:'',status:'ok',statusText:'Normal',note:'',ratio:'1.82',
+    pair:[{k:'Water',value:'3,840',unit:'L',delta:'+4.2% vs yesterday',up:1,sub:'208 ml per bird'},{k:'Feed',value:'2,110',unit:'kg',delta:'−1.3% vs yesterday',up:0,sub:'115 g per bird'}],
+    today:[['Water','3,840 L'],['Feed','2,110 kg'],['W / F','1.82']],chart:W.chart,
+    d:{...wd,wfmap:{birds:18420,
+      water:{today:3840,yday:3686,meters:[['Meter 1 · west line',1960],['Meter 2 · east line',1880]],pressure:32,pBand:[28,40],pMax:60,emergency:'Off',hiAlarm:'+20 %',loAlarm:'−20 %'},
+      feed:{today:2110,yday:2138,lines:[['Feeder line 1',1070,1],['Feeder line 2',1040,0]],pan:'Full',program:'Ad lib',hiAlarm:'+15 %',loAlarm:'−15 %'},
+      ratio:1.82,rBand:[1.7,2.0],rMin:1.4,rMax:2.4,
+      hw:[40,30,25,22,60,190,230,240,235,225,215,210,205,210,220,225,230,240,245,230,200,120,55,45],
+      hf:[20,15,12,10,30,105,128,132,130,124,118,115,112,114,120,124,126,130,134,126,110,66,30,24],
+      dark:[22,4]},
+      perf:[...(wd.perf||[]).slice(0,1),['Water per bird','208 ml','today'],...(fd.perf||[]).slice(0,1)],
+      subs:[...(wd.subs||[]),...(fd.subs||[])],insights:[...(wd.insights||[]),...(fd.insights||[])],
+      path:'Water & feed',settings:[...(wd.settings||[]).map(s=>({...s,t:'Water · '+s.t})),...(fd.settings||[]).map(s=>({...s,t:'Feed · '+s.t}))]}});})();
+const VP={'SaaS desktop':{k:'desk',W:1440,H:900,bw:1168,bh:796,dw:540},'Controller screen':{k:'ctrl',W:1024,H:600,bw:984,bh:496,dw:440},'SaaS tablet':{k:'tab',W:834,H:1194,bw:794,bh:1018,dw:'100%'}};
+const DEV={'Minimum · 2':['temp','vent'],'Typical · 7':['temp','vent','air','silo','water','feed'],'Full · 10':['temp','vent','air','silo','water','feed','birds','light','output']};
+const CORE=new Set(['temp','vent','press']);let HASP=false;
+const leaf=id=>({id}), row=(c,f=1,label)=>({d:'row',c,f,label}), col=(c,f=1,label)=>({d:'col',c,f,label});
+const ventCol=()=>HASP?col([{id:'vent',f:1},{id:'press',f:.32}]):leaf('vent');
+const coreRow=f=>row([leaf('temp'),ventCol()],f);
+const coreStack=(f,label)=>HASP?col([{id:'temp',f:.55},{id:'vent',f:1},{id:'press',f:.32}],f,label):col([leaf('temp'),leaf('vent')],f,label);
+function grid(ids,maxCols,f=1){const n=ids.length,r=Math.ceil(n/maxCols),base=Math.floor(n/r),extra=n%r;let k=0;const rows=[];
+  for(let i=0;i<r;i++){const cnt=base+(i>=r-extra?1:0);rows.push(row(ids.slice(k,k+cnt).map(leaf)));k+=cnt;}return col(rows,f);}
+function place(b,x,y,w,h,out,labels){
+  if(b.id){out.push({id:b.id,x,y,w,h});return;}
+  let top=y,hh=h; if(b.label){labels.push({text:b.label,x,y,w});top+=26;hh-=26;}
+  const g=12,tot=b.c.reduce((a,c)=>a+(c.f||1),0),main=(b.d==='row'?w:hh)-g*(b.c.length-1);let off=0;
+  b.c.forEach(c=>{const sz=main*(c.f||1)/tot;if(b.d==='row')place(c,x+off,top,sz,hh,out,labels);else place(c,x,top+off,w,sz,out,labels);off+=sz+g;});
+}
+function tier(id,w,h){if(CORE.has(id))return w>=260&&h>=240?'L':'M';if(w>=440&&h>=300)return 'L';if(w>=200&&h>=165)return 'M';return 'S';}
+const DIRS=[
+ {id:'3a',label:'Core & flanks — temp + vent centred; linked widgets flank them (air beside temp)',variant:'card',fn:(ids,tab)=>{
+   HASP=ids.includes('press');const o=ids.filter(i=>!CORE.has(i)); if(!o.length) return coreRow(1);
+   if(tab) return col([coreRow(1.2),grid(o,3,1.5)]);
+   const first=o.slice(0,6),bottom=o.slice(6),right=first.filter((_,i)=>i%2===0),left=first.filter((_,i)=>i%2===1);
+   const coreCol=f=>coreStack(f);
+   const center=bottom.length?col([coreCol(2.3),row(bottom.map(leaf),0.9)],1.6):coreCol(1.6);
+   return row([center,left.length?col(left.map(leaf),1):null,right.length?col(right.map(leaf),1):null].filter(Boolean));}},
+ {id:'3b',label:'Domain columns — Climate & equipment | Core vitals | Flock & feed',variant:'card',fn:(ids,tab)=>{
+   HASP=ids.includes('press');const c=['air','light','output'].filter(i=>ids.includes(i)),p=['birds','wf','water','feed','silo'].filter(i=>ids.includes(i));
+   if(!c.length&&!p.length) return coreRow(1);
+   if(tab) return col([coreRow(1.3),c.length?row(c.map(leaf),0.75,'Climate & equipment'):null,p.length?row(p.map(leaf),0.75,'Flock & feed'):null].filter(Boolean));
+   return row([coreStack(1.5,'Core vitals'),c.length?col(c.map(leaf),1,'Climate & equipment'):null,p.length?col(p.map(leaf),1,'Flock & feed'):null].filter(Boolean));}},
+ {id:'3c',label:'Daily record — status strip, core vitals, readings board with today min / max for inspectors',variant:'ledger',fn:(ids,tab)=>{
+   const o=ids.filter(i=>!CORE.has(i)); if(!o.length) return coreRow(1);
+   HASP=ids.includes('press');const nb=Math.ceil(o.length/2),bottom=o.slice(0,nb),top=o.slice(nb);
+   if(tab) return col([top.length?grid(top,4,0.5):null,coreRow(1.8),grid(bottom,2,1.4)].filter(Boolean));
+   return col([top.length?row(top.map(leaf),0.55):null,coreRow(2),row(bottom.map(leaf),1.15)].filter(Boolean));}}
+];
+const MODES={
+ 'Grow-out':{bg:'linear-gradient(160deg,rgba(242,214,179,0) 0%,rgba(242,214,179,.18) 60%,rgba(242,214,179,.32) 100%)',chip:'#a8641c',chipBg:'#fbe7cc',target:25,line:'Day 28 of 42 · 18,420 birds · target 25.0 °C'},
+ '1st brood':{bg:'linear-gradient(160deg,rgba(243,183,157,0) 0%,rgba(243,183,157,.18) 60%,rgba(243,183,157,.32) 100%)',chip:'#b2431f',chipBg:'#fbd9ca',target:32,line:'Day 3 · chicks under brooders · target 32.0 °C'},
+ '2nd brood':{bg:'linear-gradient(160deg,rgba(243,200,173,0) 0%,rgba(243,200,173,.18) 60%,rgba(243,200,173,.3) 100%)',chip:'#a9532a',chipBg:'#f9dfcf',target:29,line:'Day 9 · full house opened · target 29.0 °C'},
+ 'Pre heat':{bg:'linear-gradient(90deg,rgba(181,217,253,.18) 0%,rgba(242,242,243,0) 50%,rgba(246,217,191,.3) 100%)',chip:'#8a5a2b',chipBg:'#f3e2cf',target:30,line:'Chicks arrive in 26 h · floor 24.1 °C, target 30.0 °C'},
+ 'Empty':{bg:'linear-gradient(160deg,rgba(212,212,215,0) 0%,rgba(212,212,215,.3) 100%)',chip:'#5d5d60',chipBg:'#e2e3e6',target:25,line:'Cleaning & disinfection · next flock placed 18 Oct',empty:true}
+};
+function withScheme(id,t,tab,style){if(style!=='Top-view band') return row([{id:'scheme',f:tab?0.9:0.85},{...t,f:3}]);const S={id:'scheme',f:tab?0.75:0.95};
+  if(id==='3c'&&t.d==='col'&&t.c.length>2){t.c.splice(1,0,{...S,f:1.25});return t;}
+  return col([S,{...t,f:tab?2:1.9}]);}
+const MIXED={'3a':'Grow-out','3b':'Grow-out'};
+class Component extends DCLogic {
+  state={open:null,ph:0,menu:null,cat:'climate',notif:null};
+  openW(o,id,r){clearTimeout(this.ct);this.setState({open:{o,id,r},ph:0});requestAnimationFrame(()=>requestAnimationFrame(()=>this.setState({ph:1})));}
+  closeW(){this.setState({ph:0});clearTimeout(this.ct);this.ct=setTimeout(()=>this.setState({open:null}),420);}
+  componentWillUnmount(){clearTimeout(this.ct);clearTimeout(this.tt);}
+  renderVals(){
+    const vp=VP[this.props.viewport]||VP['SaaS desktop'], allIds=DEV[this.props.devices]||DEV['Full · 10'], ids=(()=>{const a=allIds.filter(i=>i!=='output');return a.includes('water')&&a.includes('feed')?a.flatMap(i=>i==='water'?['wf']:i==='feed'?[]:[i]):a;})(), badge=false;
+    const wm=Object.fromEntries(DATA.map(w=>[w.id,w])), conn=ids.map(i=>wm[i]);
+    const na=conn.filter(w=>w.status==='alert').length, nw=conn.filter(w=>w.status==='watch').length;
+    const pm='Grow-out';
+    const dirs=DIRS.filter(d=>d.id==='3a').map(def=>{
+      const mode=pm==='One per direction'?MIXED[def.id]:pm, M=MODES[mode]||MODES['Grow-out'];
+      const out=[],labels=[],hv=this.props.houseView??false; let tree=def.fn(ids,vp.k==='tab'); if(hv) tree=withScheme(def.id,tree,vp.k==='tab','Top-view column'); place(tree,0,0,vp.bw,M.empty?vp.bh-56:vp.bh,out,labels);
+      const op=this.state.open&&this.state.open.o===def.id;
+      return {id:def.id,href:'#'+def.id,label:def.label,variant:def.variant,ventLayout:def.id==='3a'||def.id==='3b'?'split':'row',ledger:def.variant==='ledger',badge,
+        desk:vp.k==='desk',tab:vp.k==='tab',ctrl:vp.k==='ctrl',
+        frameStyle:{width:vp.W,height:vp.H,maxWidth:'none',display:'flex',flex:'none'},
+        bodyStyle:{position:'relative',width:vp.bw,height:M.empty?vp.bh-56:vp.bh,margin:20,flex:'none',...(M.empty?{opacity:.45,filter:'grayscale(1)',pointerEvents:'none',overflow:'hidden'}:{})},
+        mainStyle:{flex:1,display:'flex',flexDirection:'column',minWidth:0,background:M.bg},
+        mode,modeLine:M.line,isEmpty:!!M.empty,
+        modeChipStyle:{display:'inline-flex',alignItems:'center',gap:6,padding:'3px 10px',fontSize:12,fontWeight:600,letterSpacing:'.02em',background:M.chipBg,color:M.chip,border:'1px solid '+M.chip},
+        modeDotStyle:{width:7,height:7,borderRadius:'50%',background:M.chip},
+        labels:labels.map(l=>({text:l.text,style:{position:'absolute',left:Math.round(l.x),top:Math.round(l.y),width:Math.round(l.w),height:18,fontSize:10,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--color-accent-700)',borderBottom:'1px solid var(--color-divider)'}})),
+        target:M.target,schemeView:('Top-view column')==='Top-view band'?'top-h':'top',schemeZones:[{k:'Front',t:M.target-0.7},{k:'Middle',t:M.target+0.9,al:1,alText:'Sensor 3 reads +1.8° above house average'},{k:'Back',t:M.target-1.2}],
+        schemeLines:wm.light.d.lmap.rows.map(r=>({k:r.k,on:r.on,pct:r.pct,hex:r.hex,core:r.color==='Blue'?'#4f86e8':'#f2cf2e'})),
+        slots:out.map(s=>({w:s.id==='vent'?{...wm.vent,vent:{...wm.vent.vent,driver:this.props.ventDriver??'Heating',inletsClosed:!!this.props.inletsClosed,...(this.props.pressureError?{sp:{...wm.vent.vent.sp,v:29}}:{})}}:wm[s.id],alarm:(()=>{const a=({None:'none',Warning:'warning',Danger:'danger'})['None']||'none';return s.id==='vent'&&this.props.pressureError&&a==='none'?'warning':a;})(),isScheme:s.id==='scheme',isWidget:s.id!=='scheme',
+          openLight:()=>this.openW(def.id,'light',{x:s.x,y:s.y,w:s.w,h:s.h}),openTemp:()=>this.openW(def.id,'temp',{x:s.x,y:s.y,w:s.w,h:s.h}),size:tier(s.id,s.w,s.h),dims:{w:s.w,h:s.h},
+          style:{position:'absolute',left:Math.round(s.x),top:Math.round(s.y),width:Math.round(s.w),height:Math.round(s.h)},
+          action:k=>{if(k==='mort')this.setState({mort:{dead:0,culled:0,r:{x:s.x,y:s.y,w:s.w,h:s.h}}});},open:()=>this.openW(def.id,s.id,{x:s.x,y:s.y,w:s.w,h:s.h}),openPress:()=>this.openW(def.id,'press',{x:s.x,y:s.y,w:s.w,h:s.h})})),
+        m:(()=>{const M=this.state.mort,cl=()=>this.setState({mort:null});if(!M) return {open:false};
+          const st=(k,v)=>this.setState(s=>({mort:{...s.mort,[k]:Math.max(0,v)}}));
+          return {open:true,close:cl,crumb:(vp.k==='ctrl'?'House 3':'Green Valley › House 3')+' › Birds',none:M.dead+M.culled===0,
+            rows:[['Dead','dead'],['Culled','culled']].map(([k,key])=>({k,v:M[key],atZero:M[key]===0,dec:()=>st(key,M[key]-1),inc:()=>st(key,M[key]+1),set:e=>st(key,parseInt(e.target.value,10)||0)})),
+            add:()=>{const t=[M.dead?M.dead+' dead':'',M.culled?M.culled+' culled':''].filter(Boolean).join(' · ')+' · House 3';
+              clearTimeout(this.tt);this.setState({mort:null,toast:{t,n:Date.now()}});this.tt=setTimeout(()=>this.setState({toast:null}),5000);},goBirds:()=>{const R=M.r;this.setState({mort:null});this.openW(def.id,'birds',R);}};})(),
+        toast:(()=>{const T=this.state.toast;if(!T) return {on:false};const x=()=>{clearTimeout(this.tt);this.setState({toast:null});};
+          return {on:true,t:T.t,close:x,undo:x,s:{position:'absolute',left:'50%',bottom:20,transform:'translateX(-50%)',zIndex:70,width:'min(420px,calc(100% - 32px))',boxSizing:'border-box',display:'flex',alignItems:'center',gap:10,padding:'10px 12px 10px 14px',background:'var(--color-bg)',border:'1px solid var(--color-accent-500)',boxShadow:'var(--shadow-lg)'}};})(),
+        drawerOpen:!!op,dw:op?(this.state.open.id==='press'?(()=>{const P=wm.vent.vent.sp,v=this.props.pressureError?29:P.v,off=Math.abs(v-P.target)>P.band,hi=v>P.target,b=wm.press,d=b.d;
+          if(!off) return {...b,value:String(v),press:{...b.press,...P,v}};
+          return {...b,value:String(v),status:'alert',statusText:hi?'Above band':'Below band',press:{...b.press,...P,v},
+            today:[['Max',Math.max(v,26)+' Pa'],['Min','14 Pa'],['In band','71%']],
+            d:{...d,perf:[['In band','71%','today'],['Now',v+' Pa','out of band'],['Peak',Math.max(v,26)+' Pa','now']],
+              subs:[['Static pressure',v+' Pa','alert'],['Target',P.target+' ±'+P.band+' Pa','ok'],['Low / High alarm',P.low+' / '+P.high+' Pa','ok']],
+              notes:{...d.notes,trend:(hi?'Pressure climbed ':'Pressure fell ')+Math.abs(v-P.target)+' Pa '+(hi?'above':'below')+' target in the last 20 min.'},
+              insights:[['Alarm',(hi?'Static pressure is above the ':'Static pressure is below the ')+P.target+' ±'+P.band+' Pa band. '+(hi?'Check that inlets are opening — they may be blocked or iced.':'Check for open doors or curtains.')],...d.insights.slice(1)]}};})():wm[this.state.open.id]):null,
+        ...(()=>{const r=op?this.state.open.r:{x:0,y:0,w:0,h:0},on=this.state.ph===1,bh=M.empty?vp.bh-56:vp.bh,ease='cubic-bezier(.2,.8,.2,1)',T='.42s '+ease;
+          return {scrimStyle:{position:'absolute',inset:-20,zIndex:10,background:'color-mix(in srgb,var(--color-neutral-900) 22%,transparent)',opacity:on?1:0,transition:'opacity .3s ease'},
+            xStyle:{position:'absolute',zIndex:11,overflow:'hidden',background:'var(--color-bg)',boxShadow:on?'var(--shadow-lg)':'none',
+              left:on?0:Math.round(r.x),top:on?0:Math.round(r.y),width:on?vp.bw:Math.round(r.w),height:on?bh:Math.round(r.h),
+              transition:`left ${T}, top ${T}, width ${T}, height ${T}, box-shadow .3s ease`},
+            xInner:{width:vp.bw,height:bh,opacity:on?1:0,transition:on?'opacity .22s ease .2s':'opacity .12s ease'}};})(),tempGauge:'Thermometer',
+        crumb:vp.k==='ctrl'?'House 3':'Green Valley › House 3',
+        hasOutputs:true,outputsBadge:wm.output.value+wm.output.unit.replace(' on',''),openOutputs:()=>this.openW(def.id,'output',{x:vp.bw-180,y:0,w:180,h:48}),
+        hasAlarm:na>0,alarmText:na>0?na+(na>1?' alarms':' alarm'):'Alarms',alarmClass:na>0?'btn':'btn btn-secondary',alarmStyle:na>0?{whiteSpace:'nowrap',gap:8,background:'#b3261e',color:'#fff',borderColor:'#b3261e'}:{whiteSpace:'nowrap',gap:8},
+        ...(()=>{const CATS=[['climate','Climate',['Temperature curve','Min / Max ventilation','Ventilation','Air quality','Cooling','Heating','Static pressure']],['control','Control',['Inlets','Light program','Water','Feed','Relays & outputs']],['flock','Flock',['Flock setup','Growth curve','Mortality log','Weighing','House mode']],['system','System',['Installation','Sensors & calibration','Alarm settings','Users','Network','About']]];
+          const cur=CATS.find(c=>c[0]===this.state.cat)||CATS[0];
+          const slotOf=id=>out.find(s=>s.id===id)||{x:vp.bw-180,y:0,w:180,h:48};
+          const al=conn.filter(w=>w.status==='alert'||w.status==='watch');
+          const ml=vp.k==='desk'?232:0, mt=(vp.k==='tab'?52:0)+64;
+          return {menuOpen:this.state.menu===def.id,
+            menuScrim:{position:'absolute',left:ml,right:0,top:mt,bottom:0,zIndex:30,background:'color-mix(in srgb,var(--color-neutral-900) 30%,transparent)'},
+            menuPanel:{position:'absolute',left:ml,top:mt,bottom:0,width:560,zIndex:31,display:'flex',boxShadow:'var(--shadow-lg)'},notifOpen:this.state.notif===def.id,
+            openMenu:()=>this.setState({menu:def.id,notif:null}),toggleNotif:()=>this.setState(s=>({notif:s.notif===def.id?null:def.id,menu:null})),
+            catLabel:cur[1],subs:cur[2].map(t=>({t})),
+            cats:CATS.map(([k,l],i)=>{const on=k===cur[0];return {label:l,pick:()=>this.setState({cat:k}),
+              i1:{display:k==='climate'?'inline':'none'},i2:{display:k==='control'?'inline':'none'},i3:{display:k==='flock'?'inline':'none'},i4:{display:k==='system'?'inline':'none'},
+              style:{position:'relative',flex:1,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:12,cursor:'pointer',color:on?'#fff':'var(--color-bg)',background:on?'var(--color-accent)':'transparent',borderBottom:'1px solid rgba(255,255,255,.12)'},
+              notch:{display:on?'block':'none',position:'absolute',right:0,top:'50%',transform:'translateY(-50%)',width:0,height:0,borderTop:'14px solid transparent',borderBottom:'14px solid transparent',borderRight:'14px solid var(--color-bg)'}};}),
+            notifStyle:{position:'absolute',top:62,right:20,width:400,zIndex:31,background:'var(--color-bg)',border:'1px solid var(--color-divider)',boxShadow:'var(--shadow-lg)'},
+            notifs:al.map((w,i)=>({title:w.title,text:w.alert||w.statusText,time:['10:42','11:58','09:15','08:30'][i%4],
+              dot:{width:10,height:10,borderRadius:'50%',flex:'none',marginTop:5,background:w.status==='alert'?'#b3261e':'#e8705f'},
+              go:()=>{this.setState({notif:null});const id=ids.includes(w.id)?w.id:(w.id==='water'||w.id==='feed')&&ids.includes('wf')?'wf':w.id;const r=slotOf(id);this.openW(def.id,id,{x:r.x,y:r.y,w:r.w,h:r.h});}}))};})(),hasWatch:nw>0,watchText:nw+' to watch'};
+    });
+    const nd=new Date();
+    dirs.forEach(o=>{o.day={'Grow-out':28,'1st brood':3,'2nd brood':9,'Pre heat':0,'Empty':0}[o.mode]??28;});
+    if(!this.ck) this.ck=setInterval(()=>this.forceUpdate(),30000);
+    return {dirs,clock:nd.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+' · '+nd.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'}),goHome:()=>{clearTimeout(this.ct);this.setState({open:null,ph:0,menu:null,notif:null});},close:()=>this.closeW(),closeMenu:()=>this.setState({menu:null,notif:null})};
+  }
+}
+</script>
+</body>
+</html>
