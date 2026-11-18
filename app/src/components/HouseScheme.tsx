@@ -1,0 +1,165 @@
+import { Component, createRef } from 'react';
+import { css } from '../dc';
+
+/* Ported from project/HouseScheme.dc.html — logic kept verbatim. */
+
+const DEF_LINES = [{ k: 'L1', on: 1, pct: 62, hex: '#ffe98a', core: '#f2cf2e' }, { k: 'L2', on: 1, pct: 62, hex: '#ffe98a', core: '#f2cf2e' }, { k: 'L3', on: 1, pct: 35, hex: '#8fb8ff', core: '#4f86e8' }, { k: 'L4', on: 0, pct: 0, hex: '#ffe98a', core: '#f2cf2e' }];
+function tColor(d) { return d < -1 ? 'oklch(.72 .1 240)' : d <= 0.8 ? 'oklch(.85 .02 240)' : d <= 1.5 ? 'oklch(.78 .13 65)' : 'oklch(.64 .18 28)'; }
+function tState(d) { return d < -1 ? 'cold' : d <= 0.8 ? 'ok' : d <= 1.5 ? 'warm' : 'hot'; }
+
+export type HouseSchemeProps = {
+  view?: string;
+  dims?: { w: number; h: number };
+  lines?: any[];
+  zones?: any[];
+  target?: number;
+  onOpenLight?: () => void;
+  onOpenTemp?: () => void;
+};
+
+export default class HouseScheme extends Component<HouseSchemeProps, any> {
+  uid = 'hs' + Math.random().toString(36).slice(2, 7);
+  state = { bw: 0, bh: 0 };
+  box = createRef<HTMLDivElement>();
+  ro: any;
+  componentDidMount() { this.ro = new ResizeObserver(() => { const el = this.box.current; if (!el) return; const bw = Math.round(el.clientWidth), bh = Math.round(el.clientHeight); if (bw !== this.state.bw || bh !== this.state.bh) this.setState({ bw, bh }); }); if (this.box.current) this.ro.observe(this.box.current); }
+  componentWillUnmount() { this.ro && this.ro.disconnect(); }
+  topView(lines, zones, target, CW, CH, hz) {
+    const p = this.props, shapes: any[] = [], add = (d, st, click?) => shapes.push({ d, st, click: click || null }), f = n => n.toFixed(1);
+    const cw = hz ? CH : CW, ch = hz ? CW : CH, T = (x, y) => hz ? [CW - y, x] : [x, y];
+    const x0 = 1, x1 = cw - 1, mw = x1 - x0, xm = (x0 + x1) / 2, ph = Math.min(mw * .14, ch * .08), eh = Math.min(mw * .24, ch * .14), yb = ch - 1;
+    const P = pts => 'M' + pts.map(q => T(q[0], q[1]).map(f).join(' ')).join('L'), poly = pts => P(pts) + 'Z';
+    const chev = s => [[x0, s], [xm, s - ph], [x1, s]];
+    const S = [0, 1, 2, 3].map(i => ph + i * (ch - 1 - eh - ph) / 3);
+    const edgeY = (s, x) => s - ph * (1 - Math.abs(x - xm) / (mw / 2));
+    const circ = (X, Y, r) => { const [cx, cy] = T(X, Y); return `M${f(cx - r)} ${f(cy)}a${f(r)} ${f(r)} 0 1 0 ${f(2 * r)} 0a${f(r)} ${f(r)} 0 1 0 ${f(-2 * r)} 0Z`; };
+    const disp = [zones[2], zones[1], zones[0]].map((z, i) => ({ ...z, i })), zc = disp.map(z => tColor(z.t - target));
+    const zp = disp.map((z, i) => poly([...chev(S[i]), ...chev(S[i + 1]).reverse()]));
+    const clips = zp.map((d, i) => ({ id: this.uid + 'z' + i, d }));
+    zp.forEach((d, i) => add(d, { fill: 'var(--color-neutral-100)' }, p.onOpenTemp));
+    const g = Math.max(6, Math.min(mw, (S[1] - S[0])) * .06);
+    zp.forEach((d, i) => add(d, { fill: 'none', stroke: zc[i], strokeOpacity: .3, strokeWidth: g * 2, filter: `blur(${f(g * .8)}px)`, clipPath: `url(#${clips[i].id})`, pointerEvents: 'none' }));
+    const room = poly([...chev(S[3]), [x1, yb], [x0, yb]]);
+    add(room, { fill: 'var(--color-neutral-200)', stroke: 'var(--color-neutral-500)', strokeWidth: 1 });
+    [1, 2].forEach(i => add(P(chev(S[i])), { stroke: 'var(--color-neutral-500)', strokeWidth: 1, strokeDasharray: '4 4', fill: 'none' }));
+    const lx = i => x0 + mw * (i + .5) / lines.length, grads: any[] = [];
+    const span = i => { const x = lx(i); return [edgeY(S[0], x), edgeY(S[3], x)]; };
+    const hallH = S[3] - S[0], N = Math.max(5, Math.min(12, Math.round(hallH / 70))), rr = Math.min(mw / lines.length * .62, hallH / N * .62);
+    const fy = (i, j) => { const [t, b] = span(i); return t + 28 + (b - t - 36) * (j + .5) / N; };
+    lines.forEach((l, i) => {
+      const gid = this.uid + 't' + i, k = (l.pct || 0) / 100, cx = lx(i); grads.push({ id: gid, core: l.core || l.hex, hex: l.hex, op: Math.min(1, .35 + k * .75), op2: .25 + k * .45 });
+      if (l.on) for (let j = 0; j < N; j++) add(circ(cx, fy(i, j), rr * (.65 + k * .55)), { fill: `url(#${gid})` }, p.onOpenLight);
+    });
+    lines.forEach((l, i) => {
+      const cx = lx(i), [t, b] = span(i);
+      add(P([[cx, t], [cx, b]]), { stroke: l.on ? 'var(--color-neutral-700)' : 'var(--color-neutral-400)', strokeWidth: l.on ? 1.5 : 1, strokeDasharray: l.on ? 'none' : '3 3', fill: 'none' });
+      for (let j = 0; j < N; j++) add(circ(cx, fy(i, j), 3.2), { fill: l.on ? (l.core || l.hex) : 'var(--color-bg)', stroke: l.on ? 'var(--color-neutral-800)' : 'var(--color-neutral-500)', strokeWidth: .8 }, p.onOpenLight);
+    });
+    [[.12, .3], [.55, .73]].forEach(([u, v]) => { [[x0, xm], [x1, xm]].forEach(([ea, eb]) => { const A = [ea + (eb - ea) * u, ph - ph * u + 3], B = [ea + (eb - ea) * v, ph - ph * v + 3]; add(P([A, B]), { stroke: 'var(--color-neutral-600)', strokeWidth: 5, fill: 'none' }); }); });
+    add(poly([[x0, ph], [xm, 0], [x1, ph], [x1, yb], [x0, yb]]), { fill: 'none', stroke: 'var(--color-neutral-700)', strokeWidth: 1.5, strokeLinejoin: 'round' });
+    add(P([[xm - mw * .12, yb], [xm + mw * .12, yb]]), { stroke: 'var(--color-bg)', strokeWidth: 4, fill: 'none' });
+    const tags = disp.map((z, i) => {
+      const d = z.t - target, st = tState(d); return {
+        k: z.k, alert: !!z.al, alertText: z.alText || '', v: z.t.toFixed(1) + '°', d: (d >= 0 ? '+' : '−') + Math.abs(d).toFixed(1),
+        dot: { width: 8, height: 8, borderRadius: '50%', background: st === 'hot' ? '#b3261e' : st === 'warm' ? '#e8705f' : st === 'cold' ? 'var(--color-accent)' : 'var(--color-neutral-400)' },
+        style: { position: 'absolute', left: Math.round(T(xm, (S[i] + S[i + 1]) / 2 - ph * .5)[0]), top: Math.round(T(xm, (S[i] + S[i + 1]) / 2 - ph * .5)[1]), transform: 'translate(-50%,-50%)', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'baseline', columnGap: 6, rowGap: 2, padding: '4px 8px', maxWidth: hz ? 'none' : Math.round(mw - 8), whiteSpace: hz ? 'nowrap' : 'normal', boxSizing: 'border-box', background: 'var(--color-bg)', border: '1px solid var(--color-neutral-400)', cursor: 'pointer' },
+      };
+    });
+    const lt = lines.map((l, i) => ({
+      k: l.k, v: l.on ? l.pct + '%' : 'Off', vStyle: { color: l.on ? 'var(--color-neutral-800)' : 'var(--color-neutral-500)', fontVariantNumeric: 'tabular-nums' },
+      style: { position: 'absolute', left: Math.round(T(lx(i), span(i)[0] + 4)[0]), top: Math.round(T(lx(i), span(i)[0] + 4)[1]), transform: hz ? 'translate(-100%,-50%)' : 'translateX(-50%)', display: 'flex', flexDirection: hz ? 'row' : 'column', gap: hz ? 4 : 0, alignItems: 'center', padding: '2px 4px', fontSize: 11, lineHeight: 1.15, whiteSpace: 'nowrap', background: 'var(--color-bg)', border: '1px solid var(--color-neutral-400)', cursor: 'pointer' },
+    }));
+    const ey = (S[3] - ph * .5 + yb) / 2, [ex, eyy] = T(xm, ey);
+    const ends = [{ k: 'Entrance', style: hz ? { position: 'absolute', left: Math.round(ex), top: Math.round(eyy), transform: 'translate(-50%,-50%) rotate(-90deg)', whiteSpace: 'nowrap', fontSize: 10, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-neutral-800)', pointerEvents: 'none' } : { position: 'absolute', left: Math.round(x0), width: Math.round(mw), top: Math.round(ey), transform: 'translateY(-50%)', textAlign: 'center', fontSize: 10, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-neutral-800)', pointerEvents: 'none' } }];
+    return { shapes, grads, clips, tags, ends, glows: [], lineTags: lt };
+  }
+  renderVals(): any {
+    const p = this.props, dm = p.dims || { w: 1100, h: 240 }, lines = p.lines || DEF_LINES, target = p.target ?? 25;
+    const zones = p.zones || [{ k: 'Front', t: 24.3 }, { k: 'Middle', t: 25.9 }, { k: 'Back', t: 23.8 }];
+    const on0 = lines.filter(l => l.on).length, base = { box: this.box, litText: `${on0} / ${lines.length} lines`, targetText: target.toFixed(1) + ' °C', onOpenLight: p.onOpenLight, onOpenTemp: p.onOpenTemp };
+    if (p.view === 'top' || p.view === 'top-h') { const cw = this.state.bw || Math.max(120, dm.w - 28), ch = this.state.bh || Math.max(200, dm.h - 90); return { ...base, bodyMargin: '0', vb: `0 0 ${cw} ${ch}`, ...this.topView(lines, zones, target, cw, ch, p.view === 'top-h') }; }
+    const L = 100, W = 24, H = 7, RZ = H * .3, NW = H * .28;
+    const pr: any = (x, y, z) => [x - 0.45 * y, -0.08 * x + 0.9 * y - 1.1 * z];
+    const cw = this.state.bw || Math.max(200, dm.w - 28), ch = this.state.bh || Math.max(80, dm.h - 28 - 30);
+    const pad = { l: 8, r: 8, t: 6, b: 18 };
+    const cs = [[0, 0, 0], [L, 0, 0], [L, W, 0], [0, W, 0], [0, 0, H], [L, 0, H], [L, W, H], [0, W, H]].map(q => pr(...q));
+    const mnU = Math.min(...cs.map(c => c[0])), mxU = Math.max(...cs.map(c => c[0])), mnV = Math.min(...cs.map(c => c[1])), mxV = Math.max(...cs.map(c => c[1]));
+    const aw = cw - pad.l - pad.r, ah = ch - pad.t - pad.b;
+    let sx = aw / (mxU - mnU), sy = ah / (mxV - mnV); sy = Math.min(sy, sx * 1.5); sx = Math.min(sx, sy * 1.9);
+    const ox = pad.l + (aw - (mxU - mnU) * sx) / 2, oy = pad.t + (ah - (mxV - mnV) * sy) / 2;
+    const P: any = (x, y, z) => { const [u, v] = pr(x, y, z); return [ox + (u - mnU) * sx, oy + (v - mnV) * sy]; };
+    const f = n => n.toFixed(1), path = pts => 'M' + pts.map(q => P(...q).map(f).join(' ')).join('L') + 'Z', seg = (a, b) => 'M' + P(...a).map(f).join(' ') + 'L' + P(...b).map(f).join(' ');
+    const ell = (cx, cy, cz, rx, ry, plane?) => { const pts: any[] = []; for (let i = 0; i < 20; i++) { const a = i / 20 * Math.PI * 2, c = Math.cos(a), s = Math.sin(a); pts.push(plane === 'yz' ? [cx, cy + rx * c, cz + ry * s] : [cx + rx * c, cy + ry * s, cz]); } return path(pts); };
+    const shapes: any[] = [], add = (d, st, click?) => shapes.push({ d, st, click: click || null });
+    const line = { stroke: 'var(--color-neutral-500)', strokeWidth: 1, strokeLinejoin: 'round' };
+    const zx = [0, L / 3, 2 * L / 3, L], zc = zones.map(z => tColor(z.t - target));
+    zones.forEach((z, i) => add(path([[zx[i], 0, 0], [zx[i + 1], 0, 0], [zx[i + 1], 0, H], [zx[i], 0, H]]), { fill: zc[i], fillOpacity: .75, ...line }, p.onOpenTemp));
+    add(path([[L, 0, 0], [L, W, 0], [L, W, NW], [L, 0, H]]), { fill: zc[2], fillOpacity: .5, ...line }, p.onOpenTemp);
+    add(path([[0, 0, 0], [0, W, 0], [0, W, NW], [0, 0, H]]), { fill: zc[0], fillOpacity: .5, ...line }, p.onOpenTemp);
+    for (let i = 0; i < 4; i++) { const yc = W * (i + .5) / 4; add(ell(L, yc, H * .42, 1.9, 1.9, 'yz'), { fill: 'var(--color-bg)', stroke: 'var(--color-neutral-600)', strokeWidth: 1 }); add(ell(L, yc, H * .42, .5, .5, 'yz'), { fill: 'var(--color-neutral-600)' }); }
+    add(path([[0, W * .42, 0], [0, W * .58, 0], [0, W * .58, NW * .9], [0, W * .42, NW * .9]]), { fill: 'var(--color-bg)', ...line });
+    add(path([[0, 0, 0], [L, 0, 0], [L, W, 0], [0, W, 0]]), { fill: 'var(--color-neutral-200)', ...line }, p.onOpenLight);
+    [1, 2].forEach(i => add(seg([zx[i], 0, 0], [zx[i], W, 0]), { stroke: 'var(--color-neutral-500)', strokeWidth: 1, strokeDasharray: '4 4', fill: 'none' }));
+    const N = 8, grads: any[] = [];
+    lines.forEach((l, i) => {
+      const gid = this.uid + 'g' + i, k = (l.pct || 0) / 100; grads.push({ id: gid, core: l.core || l.hex, hex: l.hex, op: Math.min(1, .35 + k * .75), op2: .25 + k * .45 });
+      const yc = W * (i + .5) / lines.length;
+      if (l.on) for (let j = 0; j < N; j++) { const xc = L * (j + .5) / N, rx = 5.4 * (.7 + k * .5), ry = 2.2 * (.7 + k * .5); add(ell(xc, yc, 0, rx, ry), { fill: `url(#${gid})` }, p.onOpenLight); }
+    });
+    lines.forEach((l, i) => {
+      const yc = W * (i + .5) / lines.length, k = (l.pct || 0) / 100;
+      add(seg([0, yc, RZ], [L, yc, RZ]), { stroke: l.on ? 'var(--color-neutral-700)' : 'var(--color-neutral-400)', strokeWidth: l.on ? 1.5 : 1, strokeDasharray: l.on ? 'none' : '3 3', fill: 'none' });
+      for (let j = 0; j < N; j++) {
+        const xc = L * (j + .5) / N;
+        if (l.on) { const rx = 5.4 * (.7 + k * .5); add(path([[xc - .6, yc, RZ], [xc + .6, yc, RZ], [xc + rx * .8, yc, 0], [xc - rx * .8, yc, 0]]), { fill: l.core || l.hex, fillOpacity: .06 + k * .16 }); }
+        add(ell(xc, yc, RZ, 1, .55), { fill: l.on ? (l.core || l.hex) : 'var(--color-neutral-300)', stroke: l.on ? 'var(--color-neutral-800)' : 'var(--color-neutral-500)', strokeWidth: .8 }, p.onOpenLight);
+      }
+    });
+    zones.forEach((z, i) => add(path([[zx[i], W, 0], [zx[i + 1], W, 0], [zx[i + 1], W, NW], [zx[i], W, NW]]), { fill: zc[i], fillOpacity: .9, ...line }, p.onOpenTemp));
+    const tags = zones.map((z, i) => {
+      const [x, y] = P((zx[i] + zx[i + 1]) / 2, W, 0), d = z.t - target, st = tState(d);
+      return {
+        k: z.k, alert: !!z.al, alertText: z.alText || '', v: z.t.toFixed(1) + '°', d: (d >= 0 ? '+' : '−') + Math.abs(d).toFixed(1),
+        dot: { width: 8, height: 8, borderRadius: '50%', background: st === 'hot' ? '#b3261e' : st === 'warm' ? '#e8705f' : st === 'cold' ? 'var(--color-accent)' : 'var(--color-neutral-400)' },
+        style: { position: 'absolute', left: Math.round(x), top: Math.round(y), transform: 'translate(-50%,-30%)', display: 'flex', alignItems: 'baseline', gap: 6, padding: '4px 8px', background: 'var(--color-bg)', border: '1px solid var(--color-neutral-400)', whiteSpace: 'nowrap', cursor: 'pointer' },
+      };
+    });
+    const on = lines.filter(l => l.on).length;
+    const lineTags = lines.map((l, i) => { const [x, y] = P(4 + i * 9, W * (i + .5) / lines.length, RZ); return { k: l.k, v: l.on ? l.pct + '%' : 'Off', vStyle: { color: l.on ? 'var(--color-neutral-800)' : 'var(--color-neutral-500)', fontVariantNumeric: 'tabular-nums' }, style: { position: 'absolute', left: Math.round(x), top: Math.round(y) - 6, transform: 'translate(-50%,-100%)', display: 'flex', gap: 4, padding: '1px 4px', fontSize: 11, whiteSpace: 'nowrap', background: 'var(--color-bg)', border: '1px solid var(--color-neutral-400)', cursor: 'pointer' } }; });
+    return { ...base, lineTags, bodyMargin: '14px', ends: [], glows: [], clips: [], vb: `0 0 ${cw} ${ch}`, shapes, grads, tags, litText: `${on} / ${lines.length} lines`, targetText: target.toFixed(1) + ' °C', onOpenLight: p.onOpenLight, onOpenTemp: p.onOpenTemp };
+  }
+  render() {
+    const v = { ...this.props, ...this.renderVals() };
+    return (
+      <div style={css('position:relative;box-sizing:border-box;width:100%;height:100%;display:flex;flex-direction:column;min-width:0')}>
+        <div style={css('display:flex;align-items:center;flex-wrap:wrap;column-gap:14px;row-gap:6px;min-width:0;flex:none;padding:0 0 8px')}>
+          <span style={css('font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700);font-weight:600;white-space:nowrap;margin-right:auto')}>House view</span>
+          <span onClick={v.onOpenTemp} style={css('display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-neutral-800);white-space:nowrap;cursor:pointer')}><span style={css('display:flex')}><span style={css('width:8px;height:10px;background:oklch(.8 .07 240)')}></span><span style={css('width:8px;height:10px;background:oklch(.9 .015 240)')}></span><span style={css('width:8px;height:10px;background:oklch(.82 .1 65)')}></span><span style={css('width:8px;height:10px;background:oklch(.68 .16 28)')}></span></span>Target {v.targetText}</span>
+        </div>
+        <div className="blueprint" style={css('flex:1;min-height:0;position:relative;display:flex;background:var(--color-bg)')}><i className="corner tl"></i><i className="corner tr"></i><i className="corner bl"></i><i className="corner br"></i>
+          <div ref={v.box} style={css(`flex:1;min-height:0;position:relative;margin:${v.bodyMargin ?? ''}`)}>
+            <svg width="100%" height="100%" viewBox={v.vb} style={css('position:absolute;inset:0;overflow:visible')}>
+              <defs>
+                {(v.grads || []).map((g, i) => <radialGradient key={i} id={g.id}><stop offset="0" stopColor={g.core} stopOpacity={g.op}></stop><stop offset=".55" stopColor={g.hex} stopOpacity={g.op2}></stop><stop offset="1" stopColor={g.hex} stopOpacity="0"></stop></radialGradient>)}
+                {(v.clips || []).map((c, i) => <clipPath key={i} id={c.id}><path d={c.d}></path></clipPath>)}
+              </defs>
+              {(v.shapes || []).map((s, i) => <path key={i} d={s.d} style={s.st} onClick={s.click || undefined}></path>)}
+            </svg>
+            {(v.glows || []).map((g, i) => <div key={i} style={g.style}></div>)}
+            {(v.lineTags || []).map((l, i) => <div key={i} onClick={v.onOpenLight} style={l.style}><span style={css('font-weight:600;color:var(--color-text)')}>{l.k}</span><span style={l.vStyle}>{l.v}</span></div>)}
+            {(v.ends || []).map((e, i) => <span key={i} style={e.style}>{e.k}</span>)}
+            {(v.tags || []).map((t, i) => (
+              <div key={i} onClick={v.onOpenTemp} style={t.style}>
+                <span style={t.dot}></span>
+                <span style={css('font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-700);font-weight:600')}>{t.k}</span>
+                <span style={css('font-family:var(--font-heading);font-size:20px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums')}>{t.v}</span>
+                <span style={css('font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums')}>{t.d}</span>
+                {t.alert ? <span title={t.alertText} style={css('position:absolute;top:-9px;right:-9px;width:18px;height:18px;border-radius:50%;background:#b3261e;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;line-height:1;box-shadow:0 0 0 2px var(--color-bg)')}>!</span> : null}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}

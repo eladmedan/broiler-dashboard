@@ -1,0 +1,12 @@
+/* Design-canvas presentation frame, ported from the prototype's <helmet> <style>. */
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid var(--color-divider)}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:var(--color-text);color:var(--color-bg);border-radius:4px;text-decoration:none}
+.dv-tname{font:600 15px/1.2 var(--font-heading);letter-spacing:.02em}
+.dv-opts{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:var(--color-neutral-200);color:var(--color-text);border-radius:4px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font-size:12px;color:var(--color-neutral-700)}
+.dv-card{background:var(--color-bg);border:1px solid var(--color-divider);overflow:hidden;position:relative}
+.dv-opt:target .dv-oid{background:var(--color-accent);color:#fff}
+.dv-next{margin:22px 0 0;font-size:12px;color:var(--color-neutral-700)}
