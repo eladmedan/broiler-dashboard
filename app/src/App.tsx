@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import BroilerDashboard, { type DashboardConfig } from './components/BroilerDashboard';
+import BroilerDashboard, { type DashboardConfig as ProtoConfig } from './components/BroilerDashboard';
+import TrioDashboard from './trio/TrioDashboard';
+
+type DashboardConfig = ProtoConfig & { design: string };
 
 type Item =
   | { k: keyof DashboardConfig; label: string; type?: undefined; opts: string[]; def: string }
   | { k: keyof DashboardConfig; label: string; type: 'bool'; def: boolean };
 
+const NEW_DESIGN = 'TrioAir (Figma)';
+const OLD_DESIGN = 'Previous prototype';
+
 const SPEC: { t: string; items: Item[] }[] = [
+  { t: 'Design', items: [{ k: 'design', label: 'Dashboard design', opts: [NEW_DESIGN, OLD_DESIGN], def: NEW_DESIGN }] },
   {
     t: 'Screen',
     items: [
@@ -89,7 +96,7 @@ export default function App() {
     <>
       <div style={{ display: 'flex', width: '100%', height: '100vh', overflow: 'hidden' }}>
         <div style={{ flex: '1 1 0', minWidth: 0, height: '100%', position: 'relative', overflow: 'auto' }}>
-          <BroilerDashboard {...cfg} />
+          {cfg.design === OLD_DESIGN ? <BroilerDashboard {...cfg} /> : <TrioDashboard {...cfg} />}
         </div>
         {open && (
           <aside

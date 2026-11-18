@@ -1,0 +1,48 @@
+/* TrioAir dashboard design tokens — from Figma file "🔵 Dashboard" (node 7854:1962). */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+.trio {
+  --gray-white: #ffffff;
+  --gray-100: #fafafa;
+  --gray-125: #f7f7f7;
+  --gray-150: #edefef;
+  --gray-200: #e4e6e7;
+  --gray-250: #cfd2d3;
+  --gray-300: #b9bec0;
+  --gray-400: #a1a7aa;
+  --gray-500: #71797c;
+  --gray-600: #4e5355;
+  --gray-700: #36393b;
+  --gray-800: #1b1d1d;
+  --gray-900: #0c0d0d;
+  --blue-150: #d5e7f3;
+  --blue-300: #8ec4f1;
+  --blue-900: #060709;
+  --red-200: #fcc4bd;
+  --red-500: #ec4848;
+  --green-200: #dcfcdb;
+  --green-600: #41ac7d;
+  --yellow-100: #fef9d5;
+  --yellow-700: #c48f07;
+
+  --fg-01: #1b1d1d;
+  --fg-02: #4e5355;
+  --fg-03: #71797c;
+  --fg-inverse-01: #ffffff;
+  --fg-inverse-02: #ffffffcc;
+  --bg-01: #ffffff;
+  --bg-02: #fafafa;
+  --bg-inverse-03: #060709;
+  --border-01: #e4e6e7;
+  --danger: #ec4848;
+
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-s: 12px; --space-m: 16px;
+  --space-l: 20px; --space-xl: 24px; --space-2xl: 32px; --space-3xl: 40px; --space-4xl: 48px; --space-6xl: 64px;
+  --radius-xs: 4px; --radius-s: 6px; --radius-m: 8px; --radius-l: 12px; --radius-xl: 16px; --radius-xxl: 100px;
+
+  --elevation-l: 0 7px 11px -5px #1844591a, 0 16px 28px 2px #18445912, 0 5px 34px 6px #1844590f;
+
+  font-family: 'Roboto', system-ui, sans-serif;
+  color: var(--fg-01);
+}
+.trio *, .trio *::before, .trio *::after { box-sizing: border-box; }
