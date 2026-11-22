@@ -155,6 +155,7 @@
 .trio-statusbar__title {
   margin: 0;
   font-size: 36px; font-weight: 600; letter-spacing: -1.8px; line-height: 32px;
+  font-variation-settings: 'opsz' 14;
   color: var(--gray-600); white-space: nowrap;
 }
 .trio-statusbar__mode {
@@ -164,6 +165,7 @@
   background: var(--gray-800);
   color: var(--gray-150);
   font-size: 20px; font-weight: 500; line-height: 24px; white-space: nowrap;
+  font-variation-settings: 'opsz' 14;
 }
 .trio-statusbar__env { display: flex; align-items: center; gap: var(--space-l); height: 42px; }
 .trio-weather {
@@ -184,6 +186,8 @@
 .trio-weather__metrics { display: flex; align-items: center; gap: var(--space-s); }
 .trio-weather__metric { display: flex; align-items: center; gap: var(--space-2xs); white-space: nowrap; }
 .trio-weather__metric--wide { gap: 10px; }
+.trio-weather__metric--wind { width: 111px; }
+.trio-weather__unit { font-variation-settings: 'opsz' 14; }
 .trio-weather__value { display: flex; align-items: baseline; gap: 2px; }
 .trio-weather__num { font-size: 24px; line-height: 24px; font-variation-settings: 'opsz' 9; }
 .trio-weather__unit { font-size: 16px; font-weight: 600; line-height: 24px; }

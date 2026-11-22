@@ -311,7 +311,7 @@ export function TrioStatusBar(props: { houseName: string; houseMode: string; onO
               </span>
             </span>
             <span className="trio-weather__sep" aria-hidden="true" />
-            <span className="trio-weather__metric trio-weather__metric--wide" title="Wind">
+            <span className="trio-weather__metric trio-weather__metric--wide trio-weather__metric--wind" title="Wind">
               <WindIcon />
               <span className="trio-weather__value" style={{ gap: 0 }}>
                 <span className="trio-weather__num">
