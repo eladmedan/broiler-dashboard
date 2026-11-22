@@ -46,3 +46,5 @@
   color: var(--fg-01);
 }
 .trio *, .trio *::before, .trio *::after { box-sizing: border-box; }
+/* Keep the legacy design-system heading styles out of the TrioAir dashboard. */
+.trio h1, .trio h2, .trio h3, .trio h4, .trio h5, .trio h6 { font-family: inherit; }

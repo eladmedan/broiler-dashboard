@@ -153,6 +153,7 @@
   overflow: hidden;
 }
 .tlc-light-glow { position: absolute; left: -9.2px; top: -16px; width: 282px; height: 257px; pointer-events: none; transition: opacity .3s; }
+.tlc-light-glow2 { mix-blend-mode: screen; }
 .tlc-light-shade { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 4px 36.6px 9px var(--gray-900); }
 .tlc-light-reading { position: absolute; left: 15px; top: 16px; display: flex; flex-direction: column; gap: 21px; }
 .tlc-light-reading .tlc-big { font-weight: 600; }

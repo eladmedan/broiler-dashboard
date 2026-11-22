@@ -154,6 +154,7 @@
 .trio-statusbar__house { display: flex; align-items: center; gap: var(--space-s); }
 .trio-statusbar__title {
   margin: 0;
+  font-family: 'DM Sans', 'Roboto', system-ui, sans-serif;
   font-size: 36px; font-weight: 600; letter-spacing: -1.8px; line-height: 32px;
   font-variation-settings: 'opsz' 14;
   color: var(--gray-600); white-space: nowrap;

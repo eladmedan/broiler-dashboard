@@ -498,6 +498,7 @@ function LightCard({ onOpen }: { onOpen?: (w: Widget) => void }) {
       {...clickable('light', onOpen)}
     >
       <img className="tlc-light-glow" src="assets/trio/light-glow.png" alt="" style={{ opacity: Math.min(glow, 1) }} />
+      <img className="tlc-light-glow tlc-light-glow2" src="assets/trio/light-glow.png" alt="" style={{ opacity: clamp(glow * 0.55, 0, 1) }} />
       <div className="tlc-light-shade" />
 
       <div className="tlc-light-reading">

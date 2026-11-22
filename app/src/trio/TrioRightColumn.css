@@ -179,7 +179,7 @@
   box-shadow: var(--elevation-l, 0 7px 11px -5px #1844591a, 0 16px 28px 2px #18445912, 0 5px 34px 6px #1844590f);
   display: flex; flex-direction: column; gap: 20px;
 }
-.trc-modal h2 { margin: 0; font-size: 22px; line-height: 28px; font-weight: 600; }
+.trc-modal h2 { margin: 0; font-family: inherit; font-size: 22px; line-height: 28px; font-weight: 600; }
 .trc-modal-sub { margin: -14px 0 0; font-size: 14px; line-height: 20px; color: var(--fg-03, #71797c); }
 .trc-step-list { display: flex; flex-direction: column; gap: 8px; }
 .trc-step {
