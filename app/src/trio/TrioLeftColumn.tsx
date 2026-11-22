@@ -142,9 +142,8 @@ const OffsetIcon = ({ up }: { up: boolean }) => (
 
 const TimerIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-    <path d="M10 3.6a6.4 6.4 0 1 1-5.6 3.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <path d="M10 10 13 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    <path d="M10 2v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M10 3.5a6.5 6.5 0 1 1-5.63 3.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M10 10 6.6 6.6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
   </svg>
 );
 
@@ -302,28 +301,28 @@ function HumidityDial({ g, treatmentActive }: { g: RangeGauge; treatmentActive: 
     <svg className="tlc-hum-dial" width="172" height="177" viewBox="0 0 172 177" aria-hidden>
       <defs>
         <linearGradient id="tlcHumBezel" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fbfbfc" />
-          <stop offset="0.55" stopColor="#dedce1" />
-          <stop offset="1" stopColor="#a8a3ad" />
+          <stop offset="0" stopColor="#dedce2" />
+          <stop offset="0.5" stopColor="#bdb8c2" />
+          <stop offset="1" stopColor="#a39da8" />
         </linearGradient>
         <linearGradient id="tlcHumRim" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#b9b5bd" />
-          <stop offset="1" stopColor="#f4f4f5" />
+          <stop offset="0" stopColor="#c9c6cd" />
+          <stop offset="1" stopColor="#e9e8eb" />
         </linearGradient>
         <radialGradient id="tlcHumFace" cx="0.5" cy="0.45" r="0.6">
-          <stop offset="0" stopColor="#f9f9f9" />
-          <stop offset="1" stopColor="#ebebec" />
+          <stop offset="0" stopColor="#efeff0" />
+          <stop offset="1" stopColor="#e6e6e8" />
         </radialGradient>
         <radialGradient id="tlcHumGreen" cx={cx} cy={cy} r="54" gradientUnits="userSpaceOnUse">
-          <stop offset="0.72" stopColor="#9fdb8f" stopOpacity="0" />
+          <stop offset="0.6" stopColor="#9fdb8f" stopOpacity="0" />
           <stop offset="1" stopColor="#8ed27d" stopOpacity="0.95" />
         </radialGradient>
         <radialGradient id="tlcHumRed" cx={cx} cy={cy} r="54" gradientUnits="userSpaceOnUse">
-          <stop offset="0.72" stopColor="#f6a8b0" stopOpacity="0" />
+          <stop offset="0.6" stopColor="#f6a8b0" stopOpacity="0" />
           <stop offset="1" stopColor="#f39aa5" stopOpacity="0.95" />
         </radialGradient>
         <radialGradient id="tlcHumGray" cx={cx} cy={cy} r="54" gradientUnits="userSpaceOnUse">
-          <stop offset="0.72" stopColor="#d4d6d8" stopOpacity="0" />
+          <stop offset="0.6" stopColor="#d4d6d8" stopOpacity="0" />
           <stop offset="1" stopColor="#d4d6d8" stopOpacity="0.25" />
         </radialGradient>
         <filter id="tlcHumShadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -333,13 +332,18 @@ function HumidityDial({ g, treatmentActive }: { g: RangeGauge; treatmentActive: 
 
       {/* bezel + face */}
       <circle cx={85.6} cy={90.6} r={85.4} fill="url(#tlcHumBezel)" filter="url(#tlcHumShadow)" />
-      <circle cx={cx} cy={cy} r={78.5} fill="url(#tlcHumRim)" />
-      <circle cx={cx} cy={cy} r={75} fill="url(#tlcHumFace)" />
+      <path d={arc(85.6, 90.6, 86.5, -110, 10)} stroke="#fff" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.9" />
+      <circle cx={cx} cy={cy} r={76.5} fill="url(#tlcHumRim)" />
+      <circle cx={cx} cy={cy} r={74.5} fill="url(#tlcHumFace)" />
+      <clipPath id="tlcHumFaceClip">
+        <circle cx={cx} cy={cy} r={74.5} />
+      </clipPath>
+      <circle cx={cx + 30} cy={cy - 34} r={66} fill="#fff" opacity="0.28" clipPath="url(#tlcHumFaceClip)" />
 
       {/* ranges */}
-      <path d={sector(cx, cy, 39, 53.7, humAngle(0), humAngle(sp))} fill="url(#tlcHumGreen)" />
-      <path d={sector(cx, cy, 39, 53.7, humAngle(sp), humAngle(hi))} fill="url(#tlcHumGray)" />
-      <path d={sector(cx, cy, 39, 53.7, humAngle(hi), humAngle(0.985))} fill="url(#tlcHumRed)" />
+      <path d={sector(cx, cy, 32, 53.7, humAngle(0), humAngle(sp))} fill="url(#tlcHumGreen)" />
+      <path d={sector(cx, cy, 32, 53.7, humAngle(sp), humAngle(hi))} fill="url(#tlcHumGray)" />
+      <path d={sector(cx, cy, 32, 53.7, humAngle(hi), humAngle(0.985))} fill="url(#tlcHumRed)" />
       <path d={arc(cx, cy, 53.7, -125, 125)} stroke="#1b1d1d" strokeWidth="0.8" fill="none" />
       {tickAngles.map((a) => {
         const [x1, y1] = polar(cx, cy, 48.9, a);
@@ -347,26 +351,20 @@ function HumidityDial({ g, treatmentActive }: { g: RangeGauge; treatmentActive: 
         return <line key={a} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#1b1d1d" strokeWidth="0.85" />;
       })}
 
-      <g transform={`translate(${cx - 16.6} ${cy + 33.4})`}>
-        <HumidityGlyph color={treatmentActive ? 'var(--green-600)' : 'var(--gray-300)'} />
+      <g transform={`translate(${cx - 24} ${cy + 26}) scale(1.45)`}>
+        <HumidityGlyph color={treatmentActive ? 'var(--green-600)' : 'var(--gray-400)'} />
       </g>
 
       {/* needle */}
       {needle !== null && (
         <g transform={`rotate(${needle} ${cx} ${cy})`} className="tlc-needle">
-          <path d={`M${cx - 0.6} ${cy - 57} L${cx + 0.6} ${cy - 57} L${cx + 2.2} ${cy + 26} L${cx - 2.2} ${cy + 26} Z`} fill="#0c0d0d" />
+          <path d={`M${cx - 0.7} ${cy - 57} L${cx + 0.7} ${cy - 57} L${cx + 1.8} ${cy} L${cx - 1.8} ${cy} Z`} fill="#0c0d0d" />
+          <line x1={cx} y1={cy} x2={cx} y2={cy + 24} stroke="#0c0d0d" strokeWidth="4.4" strokeLinecap="round" />
         </g>
       )}
-      <circle cx={cx} cy={cy} r={4.6} fill="#0c0d0d" />
-      <circle cx={cx} cy={cy} r={2.4} fill="#71797c" />
+      <circle cx={cx} cy={cy} r={5.6} fill="#2b2d2e" />
+      <circle cx={cx} cy={cy} r={3.8} fill="#8a8f92" />
 
-      {/* gloss */}
-      <path
-        d={`M${cx - 61} ${cy - 10} A62 62 0 0 1 ${cx + 52} ${cy - 46} A70 70 0 0 0 ${cx - 61} ${cy - 10} Z`}
-        fill="#fff"
-        opacity="0.5"
-      />
-      <path d={arc(cx, cy, 82, -80, 20)} stroke="#fff" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.7" />
       {zone === 'error' && (
         <text x={cx} y={cy - 18} textAnchor="middle" className="tlc-dial-err">
           ERR
@@ -500,7 +498,6 @@ function LightCard({ onOpen }: { onOpen?: (w: Widget) => void }) {
       {...clickable('light', onOpen)}
     >
       <img className="tlc-light-glow" src="assets/trio/light-glow.png" alt="" style={{ opacity: Math.min(glow, 1) }} />
-      <img className="tlc-light-glow tlc-light-glow2" src="assets/trio/light-glow.png" alt="" style={{ opacity: clamp(glow * 0.9, 0, 1) }} />
       <div className="tlc-light-shade" />
 
       <div className="tlc-light-reading">

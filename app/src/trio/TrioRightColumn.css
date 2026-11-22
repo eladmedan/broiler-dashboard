@@ -23,11 +23,13 @@
 }
 
 /* Text helpers. Figma trims text boxes to cap height; line-height = 0.7em reproduces that for DM Sans. */
+/* DM Sans sits ~2px higher than the design's Greycliff CF at 18px; nudge to match. */
+.trc-h18, .trc-press-title, .trc-bird-sum { position: relative; top: 2px; }
 .trc-h18 { font-size: 18px; line-height: 17.05px; font-weight: 600; white-space: nowrap; }
 .trc-ratio { font-size: 28px; line-height: 20px; font-weight: 500; color: var(--gray-800, #1b1d1d); white-space: nowrap; }
 .trc-big { display: flex; align-items: flex-end; height: 41px; white-space: nowrap; font-weight: 600; }
 .trc-big b { font-size: 58px; line-height: 41px; font-weight: 600; }
-.trc-big i { font-style: normal; font-size: 40px; line-height: 28px; font-weight: 600; }
+.trc-big i { margin-left: var(--trc-unit-gap, 0px); font-style: normal; font-size: 40px; line-height: 28px; font-weight: 600; }
 .trc-big .trc-err { font-size: 40px; line-height: 28px; color: var(--red-500, #ec4848); }
 
 /* clickable */
@@ -78,7 +80,7 @@
 .trc-metric:hover { background: var(--gray-200, #e4e6e7); }
 .trc-metric-top { display: flex; align-items: center; justify-content: space-between; height: 17px; }
 .trc-trend { position: relative; flex: 1 0 0; min-height: 0; border-radius: 8px; overflow: hidden; }
-.trc-trend svg { position: absolute; left: 0; bottom: 0; }
+.trc-trend > svg { position: absolute; left: 0; bottom: 0; }
 .trc-trend-sum { position: absolute; left: 10px; bottom: 10px; display: flex; align-items: center; gap: 4px; }
 .trc-cmp { font-size: 16px; line-height: 11px; font-weight: 400; white-space: nowrap; }
 
@@ -202,6 +204,7 @@
   display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 100px;
   background: #292929; color: var(--fg-inverse-01, #fff);
   font-family: 'DM Sans', 'Roboto', system-ui, sans-serif; font-size: 16px; line-height: 20px; font-weight: 500;
+  white-space: nowrap;
   box-shadow: var(--elevation-l, 0 7px 11px -5px #1844591a, 0 16px 28px 2px #18445912, 0 5px 34px 6px #1844590f);
   animation: trc-toast-in .2s ease-out;
 }

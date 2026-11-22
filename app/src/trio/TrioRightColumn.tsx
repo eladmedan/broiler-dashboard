@@ -47,8 +47,8 @@ export const MOCK_WATER: DailyMetric = { total: 1621, unit: 'L', gainPct: -5, al
 export const MOCK_FEED: DailyMetric = { total: 1327, unit: 'Kg', gainPct: 5, alarm: null };
 export const MOCK_PRESSURE: PressureReading = { cm: 8.5, alarm: null };
 export const MOCK_FCR = 1.3;
-/** Water/feed ratio as reported by the controller (null = not available). */
-export const MOCK_WATER_FEED_RATIO: number | null = 1.3;
+/** Water/feed ratio as reported by the controller; null = derive it from today's water and feed totals. */
+export const MOCK_WATER_FEED_RATIO: number | null = null;
 export const MOCK_BIRDS: BirdGroup[] = [
   { label: 'Female', count: 32000, avgKg: 2.8, mortalityPct: 5 },
   { label: 'Male', count: 29500, avgKg: 3.2, mortalityPct: -5 },
@@ -84,9 +84,9 @@ function clickable(fn: () => void) {
 }
 
 /** Big number with a smaller unit (58 / 40 px in Figma). */
-function BigValue({ value, unit, error }: { value: string | null; unit: string; error?: boolean }) {
+function BigValue({ value, unit, error, unitGap = 0 }: { value: string | null; unit: string; error?: boolean; unitGap?: number }) {
   return (
-    <div className="trc-big">
+    <div className="trc-big" style={{ '--trc-unit-gap': `${unitGap}px` } as CSSProperties}>
       {error || value === null ? (
         <span className="trc-err">ERR</span>
       ) : (
@@ -205,7 +205,7 @@ function MetricCard({
         <span className="trc-h18">{label}</span>
         {metric.alarm && <span className="trc-alarm trc-alarm--red">{ALARM_TEXT[metric.alarm]}</span>}
       </div>
-      <BigValue value={err ? null : fmtInt(metric.total as number).replace(',', '')} unit={metric.unit} error={err} />
+      <BigValue value={err ? null : fmtInt(metric.total as number).replace(',', '')} unit={metric.unit} error={err} unitGap={metric.unit.length === 1 ? 8 : 0} />
       <div className="trc-trend">
         {area}
         {!err && (
