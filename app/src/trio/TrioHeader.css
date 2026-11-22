@@ -74,7 +74,7 @@
   cursor: pointer;
   transition: background-color .12s;
 }
-.trio-tab--active { background: var(--gray-white); border-color: var(--gray-white); color: var(--gray-500); }
+.trio-tab--active { background: var(--gray-white); border: 0; color: var(--gray-500); }
 .trio-tab:hover { background: rgba(255, 255, 255, 0.06); }
 .trio-tab--active:hover { background: var(--gray-150); border-color: var(--gray-150); }
 .trio-tab:active { background: rgba(255, 255, 255, 0.12); }

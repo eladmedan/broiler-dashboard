@@ -142,7 +142,7 @@ function TreatmentIcon({ t }: { t: Treatment }) {
       );
     case 'RH':
       return (
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg viewBox="0 0 24 24" width="31" height="31" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
           <path d="M9 6.5c-2.6 3.3-4 5.6-4 7.6a4 4 0 0 0 8 0c0-2-1.4-4.3-4-7.6Z" />
           <path d="M14.5 6.5c1-.7 1.8-.7 2.8 0s1.8.7 2.8 0M14.5 9.5c1-.7 1.8-.7 2.8 0s1.8.7 2.8 0M14.5 12.5c1-.7 1.8-.7 2.8 0s1.8.7 2.8 0" />
         </svg>
@@ -150,7 +150,7 @@ function TreatmentIcon({ t }: { t: Treatment }) {
     case 'CO2':
     case 'NH3':
       return (
-        <svg viewBox="0 0 30 30" width="31" height="31">
+        <svg viewBox="0 0 30 30" width="34" height="34">
           <path
             className="tmc-cloud"
             d="M8.4 9.6a4.6 4.6 0 0 1 6.8-3.3 4.6 4.6 0 0 1 7.6 2.9 4.4 4.4 0 0 1 2.4 7.2 4.5 4.5 0 0 1-3.6 6.9 4.6 4.6 0 0 1-7.4 1.4 4.6 4.6 0 0 1-7.8-1.6 4.4 4.4 0 0 1-2.2-7.3 4.4 4.4 0 0 1 4.2-6.2Z"
@@ -169,7 +169,7 @@ function TreatmentIcon({ t }: { t: Treatment }) {
 /* ------------------------------- Fans ------------------------------- */
 
 function FanIcon({ spinning, off }: { spinning: boolean; off: boolean }) {
-  const blade = 'M45.5 38.6C44 31 47.4 24.6 54.3 22.6c3.4 6.7 2.2 13.9-3.7 17.6-1.8 1.1-4.1.6-5.1-1.6Z';
+  const blade = 'M41.2 36.5 39.6 21.2c6.6-4.4 16.3-3.2 21 3.6-6.4 1.2-10.8 5.2-12.6 11.8-1.6 2.6-5.2 2.4-6.8-.1Z';
   return (
     <svg className="tmc-fan-ic" viewBox="0 0 86 86" width="86" height="86" aria-hidden>
       <circle cx="43" cy="43" r="43" className={off ? 'tmc-fan-disc is-off' : 'tmc-fan-disc'} />
