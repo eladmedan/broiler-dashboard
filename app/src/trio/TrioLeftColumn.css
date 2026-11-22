@@ -1,0 +1,199 @@
+/* TrioAir — left column (Figma 7792:2457). Coordinates are Figma px; line-heights ≈0.71em emulate cap-trimmed text. */
+
+.tlc-col {
+  width: 608px;
+  height: 791px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--fg-01);
+}
+.tlc-col *, .tlc-col *::before, .tlc-col *::after { box-sizing: border-box; }
+
+.tlc-card {
+  background: var(--gray-125);
+  border-radius: 28px;
+  flex: none;
+}
+.tlc-h18 { font-size: 18px; line-height: 18px; font-weight: 500; white-space: nowrap; }
+.tlc-big { font-size: 58px; line-height: 41px; font-weight: 500; white-space: nowrap; }
+.tlc-big-u { font-size: 40px; }
+
+/* clickable + hover */
+.tlc-click { cursor: pointer; outline: none; transition: background-color .15s, box-shadow .15s, border-color .15s; }
+.tlc-click:focus-visible { box-shadow: 0 0 0 2px var(--blue-300); }
+.tlc-temp:hover, .tlc-timers:hover { background: var(--gray-150); }
+.tlc-hum:hover { background: var(--gray-200); }
+.tlc-air { border-radius: 12px; }
+.tlc-air:hover { background: var(--gray-150); box-shadow: 0 0 0 8px var(--gray-150); }
+.tlc-light:hover { border-color: var(--gray-150); }
+
+/* ───────── Temperature overview ───────── */
+.tlc-temp {
+  position: relative;
+  height: 273px;
+  display: flex;
+  padding: 16px 0 0 15px;
+  overflow: hidden;
+}
+.tlc-temp-summary {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 257px;
+  height: 241px;
+  border-radius: var(--radius-l);
+  background: var(--gray-800);
+  color: var(--fg-inverse-01);
+}
+.tlc-temp-label { position: absolute; left: 17px; top: 16px; font-size: 18px; line-height: 17.05px; font-weight: 500; }
+.tlc-temp-value {
+  position: absolute; left: 15px; top: 55.25px;
+  display: flex; align-items: flex-start;
+  font-size: 58px; line-height: 41px; font-weight: 600; white-space: nowrap;
+}
+.tlc-temp-value.is-danger { color: var(--danger); }
+.tlc-temp-deg { font-size: 37.41px; line-height: 27px; font-weight: 700; margin-left: 3px; margin-top: -3px; }
+.tlc-temp-thi { position: absolute; left: 17px; top: 117px; display: flex; align-items: flex-end; gap: 3px; white-space: nowrap; }
+.tlc-temp-thi-v { font-size: 32px; line-height: 23px; font-weight: 400; }
+.tlc-temp-thi-u { font-size: 16px; line-height: 11.5px; font-weight: 600; }
+.tlc-temp-wc { position: absolute; left: 17px; top: 154px; font-size: 14px; line-height: 14px; color: var(--gray-400); white-space: nowrap; }
+.tlc-temp-wc b { color: var(--fg-inverse-01); font-weight: 600; }
+
+.tlc-target-chip {
+  position: absolute; left: 15px; top: 194px;
+  min-width: 116px; height: 23px;
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  padding: 2px 5px 2px 2px;
+  border: 1px solid var(--gray-white); border-radius: 17px;
+}
+.tlc-target-ind {
+  width: 17px; height: 17px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--gray-white);
+}
+.tlc-target-text { font-size: 16px; line-height: 12px; font-weight: 500; white-space: nowrap; padding-top: 1px; }
+.tlc-target-text b { font-weight: 700; }
+
+.tlc-scale-bar {
+  position: absolute; left: 226px; top: 16px; width: 16px; height: 207px; border-radius: 50px;
+  background: linear-gradient(180deg, #e85835 0%, #ffff62 33%, #8dfc98 66%, #88f9fb 100%);
+}
+.tlc-scale-tick {
+  position: absolute; left: 0; width: 242px; height: 0;
+  display: flex; align-items: center; justify-content: flex-end;
+}
+.tlc-scale-label { font-size: 16px; line-height: 16px; font-weight: 700; color: var(--gray-400); margin-right: 4px; white-space: nowrap; }
+.tlc-scale-line { width: 28px; height: 1px; background: var(--gray-500); flex: none; }
+.tlc-scale-line.is-short { width: 11px; margin-right: 17px; }
+.tlc-scale-target {
+  position: absolute; left: 247px; width: 7px; height: 8px; background: var(--gray-white);
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+.tlc-scale-marker {
+  position: absolute; left: 224px; width: 20px; height: 9px; border-radius: 5px;
+  border: 2px solid var(--gray-900); box-shadow: 0 0 0 1.5px var(--gray-white);
+  transition: top .3s;
+}
+
+.tlc-house { position: relative; flex: none; width: 199px; }
+.tlc-house-img { position: absolute; left: -14px; top: -6px; width: 154px; height: 265px; pointer-events: none; }
+.tlc-house-divider {
+  position: absolute; left: 60px; width: 125px; height: 0;
+  border-top: 1px dotted var(--gray-500);
+}
+.tlc-house-divider::after {
+  content: ''; position: absolute; right: -2px; top: -3.5px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--gray-500);
+}
+
+.tlc-zones { flex: none; width: 89px; padding-top: 16px; display: flex; flex-direction: column; gap: 25px; }
+.tlc-zone { display: flex; flex-direction: column; gap: 7px; }
+.tlc-zone-reading { display: flex; align-items: flex-end; color: var(--fg-02); white-space: nowrap; }
+.tlc-zone-v { font-size: 20px; line-height: 14px; font-weight: 700; }
+.tlc-zone-u { font-size: 16px; line-height: 11.5px; font-weight: 600; }
+.tlc-zone-label { font-size: 16px; line-height: 11.5px; font-weight: 700; color: var(--fg-03); }
+.tlc-zone.is-warn .tlc-zone-reading { color: var(--danger); }
+.tlc-warn-icon { margin-left: 4px; align-self: center; flex: none; }
+
+/* ───────── Environmental metrics ───────── */
+.tlc-env { height: 229px; display: flex; gap: var(--space-xl); align-items: stretch; padding: 17px 16px; }
+.tlc-hum {
+  position: relative; flex: none; width: 330px;
+  padding: var(--space-m); border-radius: var(--radius-l);
+  background: var(--gray-150); color: var(--gray-900);
+}
+.tlc-hum-reading { display: flex; flex-direction: column; gap: 20px; }
+.tlc-hum-treat {
+  align-self: flex-start; margin-top: 8px; padding: 3px 8px; border-radius: var(--radius-xxl);
+  background: var(--green-200); color: var(--green-600); font-size: 13px; font-weight: 500;
+}
+.tlc-hum.is-high .tlc-big, .tlc-hum.is-error .tlc-big { color: var(--danger); }
+.tlc-hum-dial { position: absolute; left: 147px; top: 8.29px; overflow: visible; }
+.tlc-dial-err { font: 700 14px Roboto, sans-serif; fill: var(--danger); }
+.tlc-needle { transition: transform .4s; }
+
+.tlc-air { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--space-4xl); padding: 20px 0; }
+.tlc-air-metric { flex: 1 1 0; display: flex; align-items: center; justify-content: space-between; min-height: 0; }
+.tlc-air-reading { height: 100%; display: flex; flex-direction: column; justify-content: space-between; color: var(--gray-800); }
+.tlc-air-reading sub { font-size: 11.61px; font-weight: 700; vertical-align: -3px; line-height: 0; }
+.tlc-air-value { white-space: nowrap; display: flex; align-items: flex-end; }
+.tlc-air-v { font-size: 32px; line-height: 23px; font-weight: 400; }
+.tlc-air-u { font-size: 16px; line-height: 11.5px; font-weight: 600; }
+.tlc-air-metric.is-high .tlc-air-value, .tlc-air-metric.is-error .tlc-air-value { color: var(--danger); }
+.tlc-arc-gauge { flex: none; overflow: visible; }
+
+/* ───────── Controls ───────── */
+.tlc-controls { display: flex; gap: 15px; height: 257px; flex: none; }
+
+.tlc-light {
+  position: relative; flex: none; width: 288px; height: 257px;
+  border: 16px solid var(--gray-125); border-radius: 28px;
+  background: var(--gray-900); color: var(--fg-inverse-01);
+  overflow: hidden;
+}
+.tlc-light-glow { position: absolute; left: -9.2px; top: -16px; width: 282px; height: 257px; pointer-events: none; transition: opacity .3s; }
+.tlc-light-glow2 { mix-blend-mode: screen; }
+.tlc-light-shade { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 4px 36.6px 9px var(--gray-900); }
+.tlc-light-reading { position: absolute; left: 15px; top: 16px; display: flex; flex-direction: column; gap: 21px; }
+.tlc-light-reading .tlc-big { font-weight: 600; }
+.tlc-light-status {
+  position: absolute; left: 15px; top: 108px;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 14px; line-height: 16px; color: var(--fg-inverse-02); white-space: nowrap;
+}
+.tlc-sep { opacity: .6; }
+.tlc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray-500); }
+.tlc-dot.is-on { background: var(--green-600); }
+.tlc-light-err { color: var(--danger); font-weight: 500; }
+.tlc-service-badge {
+  padding: 2px 8px; border-radius: var(--radius-xxl);
+  background: var(--yellow-100); color: var(--yellow-700);
+  font-size: 12px; line-height: 14px; font-weight: 700; text-transform: uppercase;
+}
+.tlc-light-btn {
+  position: absolute; left: 14px; top: 169px; width: 227px; height: 40px;
+  display: flex; align-items: center; justify-content: center; gap: var(--space-xs);
+  padding: 0 var(--space-s); border: none; border-radius: var(--radius-xxl);
+  background: var(--gray-white); color: var(--gray-900);
+  font: 500 16px/1.2 'Roboto', system-ui, sans-serif; text-transform: uppercase; white-space: nowrap;
+  cursor: pointer; transition: background-color .15s;
+}
+.tlc-light-btn:hover { background: var(--gray-150); }
+.tlc-light-btn:focus-visible { outline: 2px solid var(--blue-300); outline-offset: 2px; }
+.tlc-light.is-service .tlc-light-btn { background: var(--yellow-100); }
+.tlc-light.is-service .tlc-light-btn:hover { background: #fdf2b0; }
+
+.tlc-timers { flex: 1 1 0; min-width: 0; height: 100%; padding: 16px; display: flex; }
+.tlc-timers-list { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 16px 0; }
+.tlc-timers-head { padding: 0 16px; color: var(--blue-900); }
+.tlc-timer-items { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.tlc-timer {
+  display: flex; align-items: center; gap: var(--space-2xs);
+  padding: var(--space-xs) 16px; border-radius: var(--radius-xs);
+  color: var(--gray-800); font-size: 16px; line-height: 20px;
+}
+.tlc-timer svg { flex: none; }
+.tlc-timer-name { flex: 1; font-weight: 400; }
+.tlc-timer-state { font-weight: 600; }
+.tlc-timer.is-on { background: var(--gray-800); color: var(--gray-white); }
