@@ -1,0 +1,211 @@
+/* TrioAir — middle column (Figma 7828:2590). Colors use tokens from tokens.css with fallbacks. */
+
+.tmc-col {
+  width: 640px;
+  height: 791px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 17px 16px;
+  background: var(--gray-125, #f7f7f7);
+  border-radius: 28px;
+  overflow: hidden;
+  font-family: 'Roboto', system-ui, sans-serif;
+  color: var(--gray-900, #0c0d0d);
+}
+.tmc-col *, .tmc-col *::before, .tmc-col *::after { box-sizing: border-box; }
+
+.tmc-h18 { font-size: 18px; line-height: 17.05px; font-weight: 500; white-space: nowrap; }
+.tmc-white { color: var(--gray-white, #fff); }
+
+/* clickable cards */
+.tmc-click { cursor: pointer; outline: none; transition: background-color .15s, box-shadow .15s, filter .15s; }
+.tmc-click:focus-visible { box-shadow: 0 0 0 2px var(--blue-300, #8ec4f1); }
+
+/* ---------------- Ventilation ---------------- */
+.tmc-vent {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 16px;
+  background: var(--gray-800, #1b1d1d);
+  border-radius: 12px;
+}
+.tmc-vent:hover { background: #262929; }
+.tmc-vent-top {
+  height: 138px;
+  padding: 16px 16px 6px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+}
+.tmc-vent-left { width: 136px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; }
+.tmc-vent-titles { display: flex; flex-direction: column; gap: 20px; }
+.tmc-vent-level { font-size: 58px; line-height: 0.71; font-weight: 500; color: #fff; height: 41px; }
+.tmc-vent-cfm { display: flex; gap: 2px; align-items: flex-end; color: #fff; white-space: nowrap; }
+.tmc-cfm-val { font-size: 32px; line-height: 0.71; font-weight: 400; height: 23px; }
+.tmc-cfm-unit { font-size: 16px; line-height: 0.71; font-weight: 500; height: 11.4px; }
+
+.tmc-scale { flex: 1 0 0; min-width: 0; height: 116px; display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; }
+.tmc-bars { display: flex; gap: 4px; align-items: flex-end; }
+.tmc-bar { flex: 1 0 0; min-width: 0; border-radius: 20px; transition: background-color .3s; }
+.tmc-bar--out { background: var(--gray-600, #4e5355); }
+.tmc-bar--range { background: var(--gray-400, #a1a7aa); }
+.tmc-bar--cur { background: #fff; }
+.tmc-groups { display: flex; gap: 4px; align-items: center; }
+.tmc-group {
+  min-width: 0;
+  height: 20px;
+  border-top: 1px solid var(--fg-03, #71797c);
+  color: #b7b7ba;
+  font-size: 16px;
+  line-height: 19px;
+  padding-top: 1px;
+  white-space: nowrap;
+}
+.tmc-group--basic { font-weight: 700; }
+.tmc-group--power { font-weight: 600; }
+.tmc-group--tunnel { font-weight: 900; padding-top: 0; }
+
+.tmc-treat { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+.tmc-treat-label { font-size: 16px; font-weight: 500; color: #fff; }
+.tmc-treat-icons { display: flex; gap: 20px; align-items: center; }
+.tmc-treat-ic {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gray-600, #4e5355);
+  color: var(--gray-600, #4e5355);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tmc-treat-ic.is-active { background: var(--gray-100, #fafafa); border-color: var(--gray-100, #fafafa); color: var(--gray-800, #1b1d1d); }
+.tmc-cloud { fill: var(--gray-600, #4e5355); }
+.tmc-cloud-txt { font-size: 8.4px; font-weight: 600; fill: var(--gray-800, #1b1d1d); font-family: 'Roboto', system-ui, sans-serif; }
+.tmc-treat-ic.is-active .tmc-cloud { fill: var(--gray-800, #1b1d1d); }
+.tmc-treat-ic.is-active .tmc-cloud-txt { fill: #fff; }
+
+/* ---------------- Fans ---------------- */
+.tmc-fans {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--gray-150, #edefef);
+  border-radius: 12px;
+}
+.tmc-fans:hover { background: var(--gray-200, #e4e6e7); }
+.tmc-fans-left { width: 94px; display: flex; flex-direction: column; gap: 20px; white-space: nowrap; }
+.tmc-fans-state { font-size: 58px; line-height: 0.71; height: 41px; font-weight: 700; }
+.tmc-cycle { margin-top: -6px; font-size: 14px; line-height: 16px; font-weight: 500; color: var(--fg-03, #71797c); font-variant-numeric: tabular-nums; }
+.tmc-fan {
+  position: relative;
+  width: 106px;
+  height: 158px;
+  flex-shrink: 0;
+  border-radius: 25px;
+  background: #c4c7c9;
+}
+.tmc-fan.is-off { background: var(--gray-200, #e4e6e7); }
+.tmc-fan-ic { position: absolute; left: 10px; top: 9px; }
+.tmc-fan-disc { fill: var(--gray-900, #0c0d0d); }
+.tmc-fan-disc.is-off { fill: var(--gray-400, #a1a7aa); }
+.tmc-fan-blade { fill: var(--gray-200, #e4e6e7); }
+.tmc-fan-hub { fill: var(--gray-900, #0c0d0d); }
+.tmc-fan-hub.is-off { fill: var(--gray-400, #a1a7aa); }
+.tmc-fan-rotor { transform-origin: 43px 43px; transform-box: view-box; }
+.tmc-fan-rotor.is-spinning { animation: tmc-spin 1.2s linear infinite; }
+@keyframes tmc-spin { to { transform: rotate(360deg); } }
+.tmc-fan-txt {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 1px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--bg-inverse-03, #060709);
+  white-space: nowrap;
+}
+.tmc-fan.is-off .tmc-fan-txt { color: var(--fg-03, #71797c); }
+.tmc-fan-count { font-size: 24px; line-height: 17.05px; font-weight: 700; }
+.tmc-fan-type { font-size: 16px; line-height: 17.05px; font-weight: 500; letter-spacing: -0.16px; }
+
+/* ---------------- Pressure | Inlets ---------------- */
+.tmc-bottom { flex: 1 0 0; min-height: 0; display: flex; gap: 16px; align-items: stretch; }
+.tmc-pressure {
+  position: relative;
+  flex: 1 0 0;
+  min-width: 0;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+.tmc-pressure:hover, .tmc-inlets:hover { background: var(--gray-150, #edefef); }
+.tmc-pressure-head { display: flex; flex-direction: column; gap: 20px; white-space: nowrap; }
+.tmc-pressure-val { font-size: 58px; line-height: 0.71; height: 41px; font-weight: 500; }
+.tmc-pressure-val.is-alarm { color: var(--danger, #ec4848); }
+.tmc-pressure-unit { font-size: 40px; }
+.tmc-target {
+  width: 116px;
+  height: 23px;
+  border: 1px solid var(--gray-700, #36393b);
+  border-radius: 17px;
+  padding: 2px 5px 2px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--gray-700, #36393b);
+}
+.tmc-target-dot {
+  width: 17px;
+  height: 100%;
+  border-radius: 21px;
+  background: var(--gray-700, #36393b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tmc-target-txt { font-size: 16px; line-height: 17.05px; font-weight: 500; white-space: nowrap; padding-bottom: 1px; }
+.tmc-target-txt b { font-weight: 700; }
+.tmc-gauge { position: absolute; left: calc(50% - 1px); top: calc(50% + 79.86px); transform: translate(-50%, -50%); overflow: visible; }
+.tmc-needle { transition: transform .6s cubic-bezier(.3, 1.4, .5, 1); }
+
+.tmc-divider { width: 1px; flex-shrink: 0; background: var(--gray-250, #cfd2d3); margin: 0 -0.5px; }
+
+.tmc-inlets {
+  width: 361px;
+  flex-shrink: 0;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.tmc-inlets > .tmc-inlet-group { flex: 0 0 113.5px; }
+.tmc-inlet-group { display: flex; flex-direction: column; gap: 21px; min-height: 0; }
+.tmc-inlet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gray-400, #a1a7aa);
+  white-space: nowrap;
+}
+.tmc-count { font-size: 16px; line-height: 17.05px; font-weight: 700; }
+.tmc-count-total { color: var(--gray-600, #4e5355); }
+.tmc-inlet-grid { flex: 1 0 0; min-height: 0; display: grid; column-gap: 20px; }
+.tmc-inlet { display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 0; }
+.tmc-inlet-ic { flex: 1 0 0; min-height: 0; width: 100%; display: flex; }
+.tmc-inlet-pct { font-size: 16px; line-height: 0.71; height: 11.4px; font-weight: 700; color: var(--bg-inverse-03, #060709); text-align: center; width: 100%; }
